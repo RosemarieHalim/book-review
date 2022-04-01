@@ -33,3 +33,7 @@ var bookTagLanguageEl = document.querySelector("#book-tag-language")
 //     }
 //   );
 
+// BURGER ELEMENT FUNCTION
+function burger(x) {
+    x.classList.toggle("change");
+}

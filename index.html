@@ -11,8 +11,28 @@
 <body>
 <!-- HEADER SECTION -->
     <header>
-
+        <div class="row header">
+            <!-- logo/home button -->
+            <a href="index.hmtl"><img src="./assets/img/logo.png" alt="logo of book" class="logo"></a>
+            <!-- search bar -->
+            <input class="input" type="text" placeholder="Title">
+            <!-- hamburger menu -->
+            <div class="burger" onclick="burger(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+                <div class="readList" onclick="readList()"></div>
+            </div>
+        </div>
     </header>
+
+    <div class="overlay">
+        <h2>Bookmarks</h2>
+        <ul class="bookmarkList" id="bookmarkList">
+            <li class="bookmark" id="bookmark"></li>
+        </ul>
+    </div>
+    
 <!-- CONTAINER/CONTENT SECTION -->
     <div id="book-info-container" class="container">
         <h2 id="book-title">BooK title</h2>
@@ -33,8 +53,8 @@
     <footer>
 
     </footer>
-
-
+    
+    <script src="./assets/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
