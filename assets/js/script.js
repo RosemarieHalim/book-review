@@ -1,23 +1,35 @@
 
+// Variables from DOM
+var bookInfoEl = document.querySelector("#book-info-container") //the general information container for the book
+var bookTitleEl = document.querySelector("#book-title")
 
-    // example of an API call from google
-fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:philosopher+stone&printType=books&maxResults=40").then(
-    (response) => {
-      response.json().then((data) => {
-          console.log("GOOGLE DATA seach by title");
-          console.log(data);
-          var bookId = data.items[0].volumeInfo.industryIdentifiers[0].identifier
-          console.log(bookId)
+var bookSummaryEl = document.querySelector("#book-summary") //the summary of the book
+var bookImageEl = document.querySelector("#book-cover-img") // the cover image of the book
 
-            //example of an API call from open library using ISBN:9780756413712 identifier as parameter
-        fetch("https://openlibrary.org/api/books?bibkeys=ISBN:"+bookId+"&jscmd=details&format=json").then(
-            (response) => {
-            response.json().then((data) => {
-                console.log("OPEN LIBRARY DATA");
-                console.log(data);
-            });
-            }
-        );
-      });
-    }
-  );
+var bookTagGenreEl = document.querySelector("#book-tag-genere")
+var bookTagAuthorEl = document.querySelector("#book-tag-author")
+var bookTagTopicEl = document.querySelector("#book-tag-topic")
+var bookTagLanguageEl = document.querySelector("#book-tag-language")
+ 
+//     // example of an API call from google, serching by the words included in the Book Tile 
+// fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:the+name+wind&printType=books&maxResults=40").then(
+//     (response) => {
+//       response.json().then((data) => {
+//           console.log("GOOGLE DATA seach by title and gives ID:");
+//           console.log(data);
+//           var bookId = data.items[0].volumeInfo.industryIdentifiers[0].identifier
+//           console.log(data.items[0].searchInfo.textSnippet)
+
+//             //example of an API call from open library using ISBN:9780756413712 identifier as parameter
+//         fetch("https://openlibrary.org/api/books?bibkeys=ISBN:"+bookId+"&jscmd=details&format=json").then(
+//             (response) => {
+//             response.json().then((data) => {
+//                 console.log("OPEN LIBRARY DATA by identifier");
+//                 console.log(data);
+//             });
+//             }
+//         );
+//       });
+//     }
+//   );
+
