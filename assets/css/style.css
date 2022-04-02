@@ -17,6 +17,7 @@
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 9;
 }
 
 .logo {
@@ -34,6 +35,7 @@
     background-color: black;
     margin: 6px 0;
     transition: 0.4s;
+    z-index: 100;
   }
   
   /* Rotate first bar */
@@ -59,3 +61,11 @@
 }
 
 /* OVERLAY */
+.overlay {
+  width: 30%;
+  height: 100%;
+  background-color: seashell;
+  z-index: 10;
+  position: sticky;
+  float: right;
+}
