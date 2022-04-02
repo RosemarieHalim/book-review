@@ -34,19 +34,25 @@
     </div>
     
 <!-- CONTAINER/CONTENT SECTION -->
-    <div id="book-info-container" class="container">
-        <h2 id="book-title">BooK title</h2>
-        <h3 id="summary-title">Book Summary</h3>
-        <div id="book-summary-container" class="container">
-                <p id="book-summary">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptatibus officia sint odit in expedita molestiae repellat, ad ipsam, praesentium aspernatur quidem beatae at non aut animi asperiores! Veniam, eaque!
+    <div id="book-info-container" class="card is is-centered">
+        <div class="card-header">
+            <h2 id="book-title" class="card-header-title">Book Title</h2>
+        </div>
+
+        <div id="book-summary-container" class="card-content">
+            <h3 id="summary-title">Summary</h3>
+            <div class="colums">
+                <p id="book-summary" class="colum">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptatibus officia sint odit in expedita molestiae repellat, ad ipsam, praesentium aspernatur quidem beatae at non aut animi asperiores! Veniam, eaque!
                 </p>
-                <img id="book-cover-img">
+                <img src="./assets/img/bookmark.png" id="book-cover-img" class="colum">
+            </div>
         <div>
-        <div id="book-tags-container" class="box">
-            <label id="book-tag-genere">Fantasy</label>
-            <label id="book-tag-author">Author: Patrick Rothfuss</label>
-            <label id="book-tag-topic">Topic</label>
-            <label id="book-tag-language">ENGLISH</label>
+
+        <div id="book-tags-container" class="card-footer">
+            <label id="book-tag-genere" class="card-footer-item">Fantasy</label>
+            <label id="book-tag-author" class="card-footer-item">Author: Patrick Rothfuss</label>
+            <label id="book-tag-topic" class="card-footer-item">Topic</label>
+            <label id="book-tag-language" class="card-footer-item">ENGLISH</label>
         </div>
     </div>
 <!-- FOOTER SECTION -->

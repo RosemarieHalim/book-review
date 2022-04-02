@@ -18,7 +18,7 @@ fetch(
     `https://www.googleapis.com/books/v1/volumes/?q=intitle:harry+potter`
   ).then((response) => {
     response.json().then((data) => {
-    //   console.log(data);
+      console.log(data);
   
       var arrayOfBooks = [];
   
@@ -37,6 +37,11 @@ fetch(
       });
     });
   });
+
+
+  
+
+  
 
 // BURGER ELEMENT FUNCTION
 function burger(x) {
