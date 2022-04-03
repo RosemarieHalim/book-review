@@ -1,74 +1,86 @@
 
-    // Variables from DOM
-var bookNameInput = document.querySelector(".input")
+    // Selecting the section where the book information goes
+var bookListContainer = document.querySelector(".book-profiles-container") // container for all the listed books
+    
+    // saves the values of the data retreived fomr the call
+var arrayOfBooks = [];
 
-var bookInfoEl = document.querySelector("#book-info-container") //the general information container for the book
-var bookTitleEl = document.querySelector("#book-title")
-
-var bookSummaryEl = document.querySelector("#book-summary") //the summary of the book
-var bookImageEl = document.querySelector("#book-cover-img") // the cover image of the book
-
-var bookTagGenreEl = document.querySelector("#book-tag-genere")
-var bookTagAuthorEl = document.querySelector("#book-tag-author")
-var bookTagTopicEl = document.querySelector("#book-tag-topic")
-var bookTagLanguageEl = document.querySelector("#book-tag-language")
- 
-    // API call
-fetch(
-    `https://www.googleapis.com/books/v1/volumes/?q=intitle:harry+potter`
-  ).then((response) => {
+    //API call 
+fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:wolf+winter&printType=books&maxResults=3")
+.then((response) => {
     response.json().then((data) => {
-      console.log(data);
-  
-      var arrayOfBooks = [];
-  
+        console.log(data)
       data.items.forEach((book) => {
         var bookDetails = {
-          title: book.volumeInfo.title,
-          authors: book.volumeInfo.authors,
-          imageLink: book.volumeInfo.imageLinks.thumbnail,
-          description: book.volumeInfo.description,
-          genre: book.volumeInfo.categories,
-          averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
-          numberOfRatings: book.volumeInfo.ratingsCount,
+            title: book.volumeInfo.title,
+            authors: book.volumeInfo.authors[0],
+            imageLink: book.volumeInfo.imageLinks.thumbnail,
+            description: book.volumeInfo.description,
+            genre: book.volumeInfo.categories[0],
+            averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
+            published: book.volumeInfo.publishedDate,
+            isbn: book.items[0].volumeInfo.industryIdentifiers[1].industryIdentifier
         };
         arrayOfBooks.push(bookDetails);
-        console.log(bookDetails)
+        createList();  
       });
     });
   });
 
+    // create a section/card for every book from the API call
+var createList = function (){
+    for (let i = 0; i < arrayOfBooks.length; i++) {
+        console.log(arrayOfBooks[i].title)
 
-  
+    var bookInfoContainer = document.createElement("div")
+        bookInfoContainer.className = "book-info-container card"; //container for each book info
 
-  
+        var bookTitleEl = document.createElement("h2")
+        bookTitleEl.className = "book-title card-header card-header-title";
+        bookTitleEl.textContent= arrayOfBooks[i].title    //and summaryTitleEl
+
+        var summaryTitleEl = document.createElement("h3")
+        summaryTitleEl.className = "p-3 summary-title"
+        summaryTitleEl.innerText = "Summary"
+
+
+        var bookSummaryContainer = document.createElement("div")
+        bookSummaryContainer.className = "summary-body p-3" //container for the summary and book cover
+            var bookSummaryEl = document.createElement("p")
+            bookSummaryEl.className = "book-summary"
+            bookSummaryEl.textContent= arrayOfBooks[i].description
+
+            var bookCoverEl = document.createElement("img")
+            bookCoverEl.setAttribute("src", arrayOfBooks[i].imageLink)
+    
+        // content for bookTagsContainer 
+        var bookTagsContainer = document.createElement("div")
+        bookTagsContainer.className = "book-tags-container card-footer" 
+            var tagGenreEl = document.createElement("p")
+                tagGenreEl.className = "book-tag"
+                tagGenreEl.innerHTML = "<p>Genre</p></br><tag class=is-danger>"+ arrayOfBooks[i].genre +"</tag>"
+            var tagAuthorEl = document.createElement("p")
+                tagAuthorEl.className = "book-tag"
+                tagAuthorEl.innerHTML = "<p>Author</p></br><tag class=is-danger>"+ arrayOfBooks[i].authors +"</tag>"
+            var tagPublishedEl = document.createElement("p")
+                tagPublishedEl.className = "book-tag"
+                tagPublishedEl.innerHTML = "<p>Published:</p></br><tag class=is-danger>"+ arrayOfBooks[i].published +"</tag>"
+            var tagRatingEl = document.createElement("p")
+                tagRatingEl.className = "book-tag"
+                tagRatingEl.innerHTML = "<p>Ratings</p></br><tag class=is-danger>"+ arrayOfBooks[i].averageRating +"</tag>"
+            var tagIsbnEl = document.createElement("p")
+                tagIsbnEl.className = "book-tag"
+                tagIsbnEl.innerHTML = "<p>Genre</p></br><tag class=is-danger>"+ arrayOfBooks[i].isbn +"</tag>"
+
+    bookSummaryContainer.append(bookSummaryEl, bookCoverEl)
+    bookTagsContainer.append(tagGenreEl, tagAuthorEl, tagPublishedEl, tagRatingEl, tagIsbnEl)
+    bookInfoContainer.append(bookTitleEl, summaryTitleEl, bookSummaryContainer, bookTagsContainer)
+    bookListContainer.append(bookInfoContainer)
+    }//for loop ends
+};
+
 
 // BURGER ELEMENT FUNCTION
 function burger(x) {
     x.classList.toggle("change");
 }
-
-
-
-
-//     // example of an API call from google, serching by the words included in the Book Tile 
-// fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:the+name+wind&printType=books&maxResults=40").then(
-//     (response) => {
-//       response.json().then((data) => {
-//           console.log("GOOGLE DATA seach by title and gives ID:");
-//           console.log(data);
-//           var bookId = data.items[0].volumeInfo.industryIdentifiers[0].identifier
-//           console.log(data.items[0].searchInfo.textSnippet)
-
-//             //example of an API call from open library using ISBN:9780756413712 identifier as parameter
-//         fetch("https://openlibrary.org/api/books?bibkeys=ISBN:"+bookId+"&jscmd=details&format=json").then(
-//             (response) => {
-//             response.json().then((data) => {
-//                 console.log("OPEN LIBRARY DATA by identifier");
-//                 console.log(data);
-//             });
-//             }
-//         );
-//       });
-//     }
-//   );

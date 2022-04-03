@@ -58,4 +58,40 @@
   margin: 0 15px;
 }
 
+
+/* STYLES FOR THE BOOK INFORMATION CARDS*/
+
+.book-profiles-container{
+    background: linear-gradient(to right, rgb(110, 150, 167), rgb(145, 165, 173), rgb(110, 150, 167));
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+.summary-body {
+    display: flex;
+    background-color: aliceblue;
+    align-items: center;
+}
+
+.summary-body p {
+    width: 87.5%;
+    text-align: center;
+}
+
+.summary-body img {
+    margin: auto;
+    text-align: center;
+}
+
+.book-tags-container {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+/* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
+
+
 /* OVERLAY */
