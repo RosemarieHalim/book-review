@@ -6,7 +6,7 @@ var bookListContainer = document.querySelector(".book-profiles-container") // co
 var arrayOfBooks = [];
 
     //API call 
-fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:wolf+winter&printType=books&maxResults=3")
+fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:love+death&printType=books&maxResults=10")
 .then((response) => {
     response.json().then((data) => {
         console.log(data)
@@ -33,10 +33,10 @@ var createList = function (){
         console.log(arrayOfBooks[i].title)
 
     var bookInfoContainer = document.createElement("div")
-        bookInfoContainer.className = "book-info-container card pb-3git add"; //container for each book info
+        bookInfoContainer.className = "book-info-container card py-3 mb-5"; //container for each book info
 
         var bookTitleEl = document.createElement("h2")
-        bookTitleEl.className = "book-title card-header card-header-title is-size-2";
+        bookTitleEl.className = "book-title card-header card-header-title is-size-2 py-4";
         bookTitleEl.textContent= arrayOfBooks[i].title    //and summaryTitleEl
 
         var summaryTitleEl = document.createElement("h3")
@@ -55,19 +55,19 @@ var createList = function (){
     
         // content for bookTagsContainer 
         var bookTagsContainer = document.createElement("div")
-        bookTagsContainer.className = "book-tags-container card-footer" 
+        bookTagsContainer.className = "book-tags-container card-footer py-3" 
             var tagGenreEl = document.createElement("p")
                 tagGenreEl.className = "book-tag"
-                tagGenreEl.innerHTML = "<p>Genre</p></br><tag>"+ arrayOfBooks[i].genre +"</tag>"
+                tagGenreEl.innerHTML = "<p class='py-1'>GENRE</p></br><tag>"+ arrayOfBooks[i].genre +"</tag>"
             var tagAuthorEl = document.createElement("p")
                 tagAuthorEl.className = "book-tag"
-                tagAuthorEl.innerHTML = "<p>Author</p></br><tag>"+ arrayOfBooks[i].authors +"</tag>"
+                tagAuthorEl.innerHTML = "<p class='py-1'>AUTHOR</p></br><tag>"+ arrayOfBooks[i].authors +"</tag>"
             var tagPublishedEl = document.createElement("p")
                 tagPublishedEl.className = "book-tag"
-                tagPublishedEl.innerHTML = "<p>Published:</p></br><tag>"+ arrayOfBooks[i].published +"</tag>"
+                tagPublishedEl.innerHTML = "<p class='py-1'>PUBLISHED</p></br><tag>"+ arrayOfBooks[i].published +"</tag>"
             var tagRatingEl = document.createElement("p")
                 tagRatingEl.className = "book-tag"
-                tagRatingEl.innerHTML = "<p>Ratings</p></br><tag>"+ arrayOfBooks[i].averageRating +"</tag>"
+                tagRatingEl.innerHTML = "<p class='py-1'>RATINGS</p></br><tag>"+ arrayOfBooks[i].averageRating +"</tag>"
             // var tagIsbnEl = document.createElement("p")
             //     tagIsbnEl.className = "book-tag"
             //     tagIsbnEl.innerHTML = "<p class=is-danger>Genre</p></br><tag class=is-danger>"+ arrayOfBooks[i].isbn +"</tag>"
