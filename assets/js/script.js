@@ -13,10 +13,10 @@ function getBookData(bookString) {
           authors: book.volumeInfo.authors[0],
           imageLink: book.volumeInfo.imageLinks.thumbnail,
           description: book.volumeInfo.description,
-          genre: book.volumeInfo.categories[0],
+          //genre: book.volumeInfo.categories[0],
           averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
           published: book.volumeInfo.publishedDate,
-          textSnippet: book.searchInfo.textSnippet,
+          //textSnippet: book.searchInfo.textSnippet,
           // isbn: book.items[0].volumeInfo.industryIdentifiers[1].industryIdentifier
         };
         arrayOfBooks.push(bookDetails);
@@ -40,9 +40,9 @@ function createListTwo(bookData) {
   //loop through the book array
   for (i = 0; i < bookData.length; i++) {
     var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
-    var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow");
-    var bookTitle = $("<h2>").text(bookData[i].title);
-    var bookAuthor = $("<h3>").text(bookData[i].authors);
+    var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow list-img hover-book");
+    var bookTitle = $("<h2>").text(bookData[i].title).addClass("hover-book-text");
+    var bookAuthor = $("<h3>").text("Author: " + bookData[i].authors).addClass("hover-book-text");
 
     columnsContainer.append(bookContainer);
 

@@ -69,8 +69,23 @@
   color: black;
 }
 
-.shadow {
-  height:;
+.list-img{
+ height: 180px;
+ width: 130px;
+}
+
+.hover-book:hover{
+  cursor: pointer;
+}
+
+.hover-book-text:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.book-title{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 /* STYLES FOR THE BOOK INFORMATION CARDS*/
 
