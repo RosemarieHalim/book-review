@@ -64,11 +64,6 @@
   margin: 0 15px;
 }
 
-<<<<<<< HEAD
-/* styles for book list */
-.link-details {
-  color: black;
-=======
 
 /* STYLES FOR THE BOOK INFORMATION CARDS*/
 
@@ -79,7 +74,6 @@
     margin-right: auto;
     padding: 1.5rem;
     border-radius: .5rem;
->>>>>>> 25e496e37cb1c117763e7e805128a2fdb35268ca
 }
 
 .list-img{

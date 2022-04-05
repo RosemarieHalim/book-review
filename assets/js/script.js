@@ -3,11 +3,7 @@ function getBookData(bookString) {
   // saves the values of the data retreived fomr the call
   var arrayOfBooks = [];
   fetch(
-<<<<<<< HEAD
-    `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=16`
-=======
     `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=15`
->>>>>>> 25e496e37cb1c117763e7e805128a2fdb35268ca
   ).then((response) => {
     response.json().then((data) => {
       console.log(data);
@@ -41,22 +37,6 @@ function createListTwo(bookData) {
   $("#main-book-list-container").append(mainBookListContainer);
   mainBookListContainer.append(columnsContainer);
 
-<<<<<<< HEAD
-  //loop through the book array
-  for (i = 0; i < bookData.length; i++) {
-    var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
-    var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow list-img hover-book");
-    var bookTitle = $("<h2>").text(bookData[i].title).addClass("hover-book-text");
-    var bookAuthor = $("<h3>").text("Author: " + bookData[i].authors).addClass("hover-book-text");
-
-    columnsContainer.append(bookContainer);
-
-    bookContainer.append(bookImg);
-    bookContainer.append(bookTitle);
-    bookContainer.append(bookAuthor);
-  }
-}
-=======
     var bookInfoContainer = document.createElement("div")
         bookInfoContainer.className = "book-info-container card py-3 mb-5"; //container for each book info
 
@@ -116,7 +96,6 @@ function createListTwo(bookData) {
     bookListContainer.append(bookInfoContainer);
   } //for loop ends
 };
->>>>>>> 25e496e37cb1c117763e7e805128a2fdb35268ca
 
 // BURGER ELEMENT FUNCTION
 function burger(x) {
