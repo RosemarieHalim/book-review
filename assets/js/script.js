@@ -40,7 +40,7 @@ function getBookData(bookString) {
     //loop through the book array
     for (i = 0; i < bookData.length; i++) {
       var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
-      var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow list-img hover-book");
+      var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow list-img hover-book book-img");
       var bookTitle = $("<h2>").text(bookData[i].title).addClass("hover-book-text");
       var bookAuthor = $("<h3>").text("Author: " + bookData[i].authors).addClass("hover-book-text");
   
@@ -51,7 +51,15 @@ function getBookData(bookString) {
       bookContainer.append(bookAuthor);
     }
   }
-  
+
+    //modal function goes here
+    $("#main-book-list-container").on("click", "img", function(){
+        console.log("image has been clicked")
+        })
+    
+    
+
+
   // BURGER ELEMENT FUNCTION
   function burger(x) {
     x.classList.toggle("change");
