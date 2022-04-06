@@ -181,3 +181,26 @@
 }
 
 /* BOOKMARK */
+
+/* search list of books */
+.book-img {
+  height: 190px;
+}
+
+.book-img:hover {
+  opacity: 0.7;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  cursor: pointer;
+}
+
+.book-list-title {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.book-list-title:hover {
+  text-decoration: underline;
+}

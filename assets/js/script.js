@@ -47,10 +47,10 @@ function createListTwo(bookData) {
     var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
     var bookImg = $("<img>")
       .attr("src", bookData[i].imageLink)
-      .addClass("shadow list-img hover-book");
+      .addClass("shadow list-img hover-book book-img");
     var bookTitle = $("<h2>")
       .text(bookData[i].title)
-      .addClass("hover-book-text book-title");
+      .addClass("hover-book-text book-title book-list-title");
     var bookAuthor = $("<h3>").text("Author: " + bookData[i].authors);
 
     //append the elements to the page
@@ -112,7 +112,7 @@ $("#myForm").on("submit", function (event) {
 //start of code to save a book to favorite book list
 $("#modal").on("click", "#saveBookBtn", function () {
   var favoritedBookInfo = {
-    title: $(this).parent().find(".title").text(),
+    //title: $(this).parent().find(".title").text(),
     // author: $(this).parent().find(".author").text(),
     // image: $(this).parent().find(".img").text(),
     // description: $(this).parent().find(".description").text(),
