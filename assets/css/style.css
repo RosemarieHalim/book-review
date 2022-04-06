@@ -64,35 +64,36 @@
   margin: 0 15px;
 }
 
-
 /* STYLES FOR THE BOOK INFORMATION CARDS*/
 
-.book-profiles-container{
-    background: linear-gradient(to right, rgb(110, 150, 167), rgb(145, 165, 173), rgba(74, 74, 255, 0.575));
-    width: 95vw;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1.5rem;
-    border-radius: .5rem;
+.book-profiles-container {
+ background: linear-gradient(to right,rgb(110, 150, 167),rgb(145, 165, 173),rgba(74, 74, 255, 0.575));
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
 }
 
-.list-img{
- height: 180px;
- width: 130px;
+.list-img {
+  height: 180px;
+  width: 130px;
 }
 
-.hover-book:hover{
+.hover-book:hover {
   cursor: pointer;
+  opacity: 0.6;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 
-.hover-book-text:hover{
+.hover-book-text:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.book-title{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+.book-title {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
 }
 /* STYLES FOR THE BOOK INFORMATION CARDS*/
 
@@ -132,16 +133,15 @@
   text-align: center;
 }
 
-.book-tag{
-    width: 20%;
+.book-tag {
+  width: 20%;
 }
 
 .book-tags-container .book-tag p {
-    font-weight: 700;
-    background-color: rgb(110, 150, 167);
-    border-radius: 15px;
-    color: white
-
+  font-weight: 700;
+  background-color: rgb(110, 150, 167);
+  border-radius: 15px;
+  color: white;
 }
 
 /* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
