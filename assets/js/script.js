@@ -28,9 +28,12 @@ function getBookData(bookString) {
 }
 
 function createListTwo(bookData) {
+  $("#book-list-container").remove();
   console.log(bookData);
   //create the three main containers for books and add bluma classes
-  var mainBookListContainer = $("<div></div>").addClass("container");
+  var mainBookListContainer = $("<div></div>")
+    .addClass("container")
+    .attr("id", "book-list-container");
   var columnsContainer = $("<div></div>").addClass(
     "columns is-multiline mt-6 has-text-centered is-family-primary"
   );
@@ -40,9 +43,15 @@ function createListTwo(bookData) {
   //loop through the book array
   for (i = 0; i < bookData.length; i++) {
     var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
-    var bookImg = $("<img>").attr("src", bookData[i].imageLink).addClass("shadow list-img hover-book");
-    var bookTitle = $("<h2>").text(bookData[i].title).addClass("hover-book-text");
-    var bookAuthor = $("<h3>").text("Author: " + bookData[i].authors).addClass("hover-book-text");
+    var bookImg = $("<img>")
+      .attr("src", bookData[i].imageLink)
+      .addClass("shadow list-img hover-book");
+    var bookTitle = $("<h2>")
+      .text(bookData[i].title)
+      .addClass("hover-book-text");
+    var bookAuthor = $("<h3>")
+      .text("Author: " + bookData[i].authors)
+      .addClass("hover-book-text");
 
     columnsContainer.append(bookContainer);
 
