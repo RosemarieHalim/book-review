@@ -117,13 +117,8 @@
 }
 
 .summary-body p {
-<<<<<<< HEAD
-  width: 83%;
-  text-align: center;
-=======
     width: 83%;
     text-align: justify;
->>>>>>> 25e496e37cb1c117763e7e805128a2fdb35268ca
 }
 
 .summary-body img {
