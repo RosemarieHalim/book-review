@@ -173,7 +173,7 @@
 
 @media (max-width: 500px) {
   header {
-    background: url("./bg-img.jpg") no-repeat 40% center / cover;
+    /* background: url("./bg-img.jpg") no-repeat 40% center / cover; */
   }
   .menu-wrap .toggler:checked ~ .menu {
     width: 65vw;

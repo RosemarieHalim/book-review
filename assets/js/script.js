@@ -106,42 +106,42 @@ function formatUserInput(input) {
     
 
 
-  // BURGER ELEMENT FUNCTION
-  function burger(x) {
-    x.classList.toggle("change");
-  }
+//   // BURGER ELEMENT FUNCTION
+//   function burger(x) {
+//     x.classList.toggle("change");
+//   }
   
-  // listen for a submit event on the form
-  $("#myForm").on("submit", function (event) {
-    //prevent the form from submitting
-    event.preventDefault();
-    //check if the input value is empty before continuing
-    if ($("#myInput").val()) {
-      //capture the users input
-      var userInput = $("#myInput").val().trim();
-      //clear the form input
-      $("#myInput").val("");
-      //call format user input
-      userInput = formatUserInput(userInput);
-      getBookData(userInput);
-    }
-  });
+//   // listen for a submit event on the form
+//   $("#myForm").on("submit", function (event) {
+//     //prevent the form from submitting
+//     event.preventDefault();
+//     //check if the input value is empty before continuing
+//     if ($("#myInput").val()) {
+//       //capture the users input
+//       var userInput = $("#myInput").val().trim();
+//       //clear the form input
+//       $("#myInput").val("");
+//       //call format user input
+//       userInput = formatUserInput(userInput);
+//       getBookData(userInput);
+//     }
+//   });
   
-  function formatUserInput(input) {
-    //turn the string into an array
-    var inputAsArray = input.split(" ");
-    var formattedInput = "";
-    //add a "+" to the end of each word except for the last word
-    for (i = 0; i < inputAsArray.length; i++) {
-      //if i + 1 is === inputAsArray.length we are at the last word, so only add the word then continue to end the loop
-      if (i + 1 === inputAsArray.length) {
-        formattedInput += inputAsArray[i];
-        continue;
-      }
-      formattedInput += inputAsArray[i] + "+";
-    }
-    return formattedInput;
-  }
+//   function formatUserInput(input) {
+//     //turn the string into an array
+//     var inputAsArray = input.split(" ");
+//     var formattedInput = "";
+//     //add a "+" to the end of each word except for the last word
+//     for (i = 0; i < inputAsArray.length; i++) {
+//       //if i + 1 is === inputAsArray.length we are at the last word, so only add the word then continue to end the loop
+//       if (i + 1 === inputAsArray.length) {
+//         formattedInput += inputAsArray[i];
+//         continue;
+//       }
+//       formattedInput += inputAsArray[i] + "+";
+//     }
+//     return formattedInput;
+//   }
   
   //------------------------------------------------------------------------------
   // Selecting the section where the book information goes
