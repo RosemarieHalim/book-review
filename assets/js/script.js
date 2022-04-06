@@ -1,16 +1,12 @@
 function getBookData(bookString) {
   fetch(
     `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=16`
-  )
-    .then((response) => {
-      response.json().then((data) => {
-        var arrayOfBooks = storeData(data);
-        createListTwo(arrayOfBooks);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+  ).then((response) => {
+    response.json().then((data) => {
+      var arrayOfBooks = storeData(data);
+      createListTwo(arrayOfBooks);
     });
+  });
 }
 
 function storeData(data) {
@@ -66,15 +62,35 @@ function createListTwo(bookData) {
   }
 }
 
+function formatbookDetailsInput(input) {
+  //turn the string into an array and join it with "+"
+  var inputAsArray = input.split(" ");
+  return inputAsArray.join("+");
+}
+
 // BURGER ELEMENT FUNCTION
 function burger(x) {
   x.classList.toggle("change");
 }
 
-function formatUserInput(input) {
-  //turn the string into an array and join it with "+"
-  var inputAsArray = input.split(" ");
-  return inputAsArray.join("+");
+function saveBook(book) {
+  console.log(book);
+  //get the local storage data
+  var existingItems = JSON.parse(localStorage.getItem("books"));
+  //if there is no data set the array to empty
+  if (existingItems === null) existingItems = [];
+  //loop through the array, if the key of an object matches the data id being updated delete the object
+  for (x = 0; x < existingItems.length; x++) {
+    if (existingItems[x].title === book.title) {
+      console.log("this book exists already");
+      existingItems.splice(x, 1);
+    }
+  }
+  //add the data object to the array
+  existingItems.push(book);
+  //set the array in local storage
+  localStorage.setItem("books", JSON.stringify(existingItems));
+  //modal to alert the book is saved goes here
 }
 
 // listen for a submit event on the form
@@ -83,12 +99,25 @@ $("#myForm").on("submit", function (event) {
   event.preventDefault();
   //check if the input value is empty before continuing
   if ($("#myInput").val()) {
-    //capture the users input
-    var userInput = $("#myInput").val().trim();
+    //capture the bookDetailss input
+    var bookDetailsInput = $("#myInput").val().trim();
     //clear the form input
     $("#myInput").val("");
-    //call format user input
-    userInput = formatUserInput(userInput);
-    getBookData(userInput);
+    //call format bookDetails input
+    bookDetailsInput = formatbookDetailsInput(bookDetailsInput);
+    getBookData(bookDetailsInput);
   }
+});
+
+//start of code to save a book to favorite book list
+$("#modal").on("click", "#saveBookBtn", function () {
+  var favoritedBookInfo = {
+    title: $(this).parent().find(".title").text(),
+    // author: $(this).parent().find(".author").text(),
+    // image: $(this).parent().find(".img").text(),
+    // description: $(this).parent().find(".description").text(),
+    // reviews: $(this).parent().find(".reviews").text(),
+    // purchaseLink: $(this).parent().find(".purchaselink").text(),
+  };
+  saveBook(favoritedBookInfo);
 });
