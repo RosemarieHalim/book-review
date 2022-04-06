@@ -13,16 +13,37 @@ function getBookData(bookString) {
             authors: book.volumeInfo.authors[0],
             imageLink: book.volumeInfo.imageLinks.thumbnail,
             description: book.volumeInfo.description,
-            //genre: book.volumeInfo.categories[0],
+            // genre: book.volumeInfo.categories[0],
             averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
             published: book.volumeInfo.publishedDate,
             //textSnippet: book.searchInfo.textSnippet,
             // isbn: book.items[0].volumeInfo.industryIdentifiers[1].industryIdentifier
+            pages: book.volumeInfo.pageCount, //MODAL modification
           };
           arrayOfBooks.push(bookDetails);
           //createList();
         });
         createListTwo(arrayOfBooks);
+
+                //MODAL functionality - generating the content based on the index number
+            $("#main-book-list-container").on("click", "img", function(){
+                console.log("Clicked image")
+                $("#book-info-modal").addClass("is-active")
+
+                var index = $(this).attr("data-index")
+                $(".modal-card-title").text(arrayOfBooks[index].title);
+                $(".modal-summary-body").text(arrayOfBooks[index].description);
+                $(".modal img").attr("src", arrayOfBooks[index].imageLink);
+                $(".modal-tag-author").text(arrayOfBooks[index].authors);
+                $(".modal-tag-pages").text(arrayOfBooks[index].pages);
+                $(".modal-tag-published").text(arrayOfBooks[index].published);
+
+            });
+                //closing the MODAL
+            $(".modal").on("click", ".delete", function(){
+            console.log("you closed the modal")
+            $("#book-info-modal").removeClass("is-active")
+            }) //end of modal fuctionality
       });
     });
   }
@@ -44,6 +65,7 @@ function getBookData(bookString) {
     for (i = 0; i < bookData.length; i++) {
       var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
       var bookImg = $("<img>")
+        .attr("data-index", i) // MODAL modification
         .attr("src", bookData[i].imageLink)
         .addClass("shadow list-img hover-book");
       var bookTitle = $("<h2>")
@@ -98,16 +120,7 @@ function getBookData(bookString) {
     return formattedInput;
   }
 
-  //modal functionality   "change made by workspace-isaiasqb"
-  $("#main-book-list-container").on("click", "img", function(){
-      console.log("Clicked image")
-      $("#book-info-modal").addClass("is-active")
-  });
 
-  $(".modal").on("click", ".delete", function(){
-    console.log("you clicked aoutside")
-    $("#book-info-modal").removeClass("is-active")
-  })
   
   //------------------------------------------------------------------------------
   // Selecting the section where the book information goes
