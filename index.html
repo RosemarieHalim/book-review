@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Book Club | Home</title>
   </head>
@@ -31,9 +29,8 @@
                   <div>
                     <ul class="bookmarkList" id="bookmarkList">
                         <li><h2>Bookmarks</h2></li>
-                        <li class="bookmark" id="bookmark"><a href="#"></a></li>
                     </ul>
-                  </div>
+                    <button class="editBtn" id="editList">Edit List</button>
                 </div>
               </div>
         </div>
@@ -42,6 +39,7 @@
 
     <!-- CONTAINER/CONTENT SECTION -->
     <section id="main-book-list-container"></section>
+    <!-- in each book have button with img in it with onclick="searchTitle()" -->
 
     <!-- MODAL FOR BOOK INFO -->
     <div class="modal" id="book-info-modal">
@@ -100,6 +98,8 @@
 
     <!-- FOOTER SECTION -->
     <footer></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>

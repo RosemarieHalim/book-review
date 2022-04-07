@@ -7,13 +7,13 @@ function getBookData(userInput) {
       "https://www.googleapis.com/books/v1/volumes?q=intitle:"+userInput+"&printType=books&maxResults=16"
     ).then((response) => {
       response.json().then((data) => {
-
+        console.log(data)
         getBookClub()
         data.items.forEach((book) => {
           var bookDetails = {
             title: book.volumeInfo.title,
             authors: book.volumeInfo.authors[0],
-            imageLink: book.volumeInfo.imageLinks.thumbnail,
+            imageLink: book.volumeInfo.imageLinks.thumbnail,    
             description: book.volumeInfo.description,
             // genre: book.volumeInfo.categories[0],
             averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
@@ -163,3 +163,52 @@ fetch("https://random-data-api.com/api/users/random_user?size=16").then(
       })
     });
     }
+ 
+
+// KEEP BOOK FUNCTION
+var deleteBtn = document.createElement('button');
+var deleteBtnArray = [];
+
+function keepTitle() {
+  var keys = Object.keys(localStorage);
+  var keyLength = keys.length;
+  while(keyLength--) {
+      var bookLi = document.createElement('li');
+      var deleteBtn = document.createElement('button');
+      deleteBtn.className = "erase";
+      deleteBtn.innerHTML = 'x';
+      bookLi.textContent = localStorage.getItem(keys[keyLength]);
+      bookLi.setAttribute('id', keys[keyLength]);
+      deleteBtn.setAttribute('style', 'display: none; margin: 5px;');
+      deleteBtn.addEventListener("click", function(e){
+        localStorage.removeItem(e.target.parentNode.id);
+        e.target.parentNode.remove();
+      });
+      deleteBtnArray.push(deleteBtn);
+      document.getElementById('bookmarkList').append(bookLi);
+      document.getElementById(keys[keyLength]).append(deleteBtn);
+  };
+};
+
+// TRASH FUNCTION
+var visible = false;
+
+function editList() {
+  var editBtn = document.getElementById('editList');
+  editBtn.innerHTML = "Edit List";
+  editBtn.addEventListener("click", function(e){
+    if(!visible) {
+      visible = true;
+      deleteBtnArray.forEach(element => element.setAttribute('style', 'display: inline;'))
+      editBtn.innerHTML = "Cancel";
+    } else {
+      visible = false;
+      deleteBtnArray.forEach(element => element.setAttribute('style', 'display: none;'))
+      editBtn.innerHTML = "Edit List";
+    }
+  });
+};
+
+saveTitle();
+editList();
+keepTitle();
