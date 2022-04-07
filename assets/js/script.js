@@ -12,7 +12,7 @@ function getBookData(bookString) {
           authors: book.volumeInfo.authors[0],
           imageLink: book.volumeInfo.imageLinks.thumbnail,
           description: book.volumeInfo.description,
-           genre: book.volumeInfo.categories[0],
+          //genre: book.volumeInfo.categories[0],
           averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
           published: book.volumeInfo.publishedDate,
           //textSnippet: book.searchInfo.textSnippet,
@@ -117,7 +117,7 @@ $(".modal-card-head").on("click", "#saveBookBtn", function () {
     pageCount: $(".modal-tag-pages").text(),
     purchaseLink: $(".modal-tag-buy").text(),
     published: $(".modal-tag-published").text(),
-    imgLink:$(".book-img").attr('src'),
+    imgLink: $(".book-img").attr("src"),
   };
   console.log(favoritedBookInfo);
   saveBook(favoritedBookInfo);
