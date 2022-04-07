@@ -267,3 +267,7 @@
 
 
    /* MODAL STYLING */
+.modal {
+    background: linear-gradient(rgba(110, 150, 167, 0.7), rgba(74, 74, 255, 0.575));
+}
+   /* END OF MODAL STYLING */

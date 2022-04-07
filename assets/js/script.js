@@ -1,12 +1,13 @@
 //API call
-function getBookData(bookString) {
+function getBookData(userInput) {
     // saves the values of the data retreived fomr the call
+    console.log(userInput)
     var arrayOfBooks = [];
     fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=16`
+      "https://www.googleapis.com/books/v1/volumes?q=intitle:"+userInput+"&printType=books&maxResults=16"
     ).then((response) => {
       response.json().then((data) => {
-        // console.log(data);
+
         getBookClub()
         data.items.forEach((book) => {
           var bookDetails = {
@@ -40,7 +41,6 @@ function getBookData(bookString) {
             });
                 //closing the MODAL
             $("#book-info-modal").on("click", ".delete", function(){
-            console.log("you closed the modal")
             $("#book-info-modal").removeClass("is-active")
             }) //end of modal fuctionality
       });
@@ -49,7 +49,6 @@ function getBookData(bookString) {
   
   function createListTwo(bookData) {
     $("#book-list-container").remove();
-    // console.log(bookData);
     //create the three main containers for books and add bluma classes
     var mainBookListContainer = $("<div></div>")
       .addClass("container")
@@ -99,30 +98,30 @@ function getBookData(bookString) {
     //check if the input value is empty before continuing
     if ($("#myInput").val()) {
       //capture the users input
-      var userInput = $("#myInput").val().trim();
-      //clear the form input
-      $("#myInput").val("");
-      //call format user input
-      userInput = formatUserInput(userInput);
-      getBookData(userInput);
+      var userInput = $("#myInput").val().replace(" ", "+")
+                                    // //clear the form input
+                                    // $("#myInput").val("");
+                                    // //call format user input
+                                    // userInput = formatUserInput(userInput);
+        getBookData(userInput);
     }
   });
   
-  function formatUserInput(input) {
-    //turn the string into an array
-    var inputAsArray = input.split(" ");
-    var formattedInput = "";
-    //add a "+" to the end of each word except for the last word
-    for (i = 0; i < inputAsArray.length; i++) {
-      //if i + 1 is === inputAsArray.length we are at the last word, so only add the word then continue to end the loop
-      if (i + 1 === inputAsArray.length) {
-        formattedInput += inputAsArray[i];
-        continue;
-      }
-      formattedInput += inputAsArray[i] + "+";
-    }
-    return formattedInput;
-  }
+                                        // function formatUserInput(input) {
+                                        //     //turn the string into an array
+                                        //     var inputAsArray = input.split(" ");
+                                        //     var formattedInput = "";
+                                        //     //add a "+" to the end of each word except for the last word
+                                        //     for (i = 0; i < inputAsArray.length; i++) {
+                                        //     //if i + 1 is === inputAsArray.length we are at the last word, so only add the word then continue to end the loop
+                                        //     if (i + 1 === inputAsArray.length) {
+                                        //         formattedInput += inputAsArray[i];
+                                        //         continue;
+                                        //     }
+                                        //     formattedInput += inputAsArray[i] + "+";
+                                        //     }
+                                        //     return formattedInput;
+                                        // }
 
 
   var moderatorInfo = []
@@ -132,7 +131,6 @@ var getBookClub = function (){
 fetch("https://random-data-api.com/api/users/random_user?size=16").then(
     (response) => {
     response.json().then((data) => {
-    //   console.log(data);
 
       for (i = 0; i<data.length; i++){
     var userDetails = {
@@ -142,7 +140,6 @@ fetch("https://random-data-api.com/api/users/random_user?size=16").then(
       address: data[i].address.street_address +", "+ data[i].address.state +", "+ data[i].zip_code +", "+ data[i].address.country+".",
       avatar: data[i].avatar
         }
-        console.log(userDetails);
         moderatorInfo.push(userDetails);
     };
       }); //end of for each loop
@@ -151,7 +148,6 @@ fetch("https://random-data-api.com/api/users/random_user?size=16").then(
         $("#book-club-modal").addClass("is-active");
 
         var index = $(this).attr("data-index")
-        // console.log(moderatorInfo[index].name)
         $("#book-club-modal .modal-card-title").text(moderatorInfo[index].name +" - (Contact Moderator)");
         $("#book-club-modal img").attr("src", moderatorInfo[index].avatar);
             // create content for the contact infomration
