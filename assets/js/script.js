@@ -196,6 +196,9 @@ function getBookData(bookString) {
 
 
 // KEEP BOOK FUNCTION
+var deleteBtn = document.createElement('button');
+var deleteBtnArray = [];
+
 function keepTitle() {
   var keys = Object.keys(localStorage);
   var keyLength = keys.length;
@@ -203,23 +206,39 @@ function keepTitle() {
       var bookLi = document.createElement('li');
       var deleteBtn = document.createElement('button');
       deleteBtn.className = "delete";
-      tn.innerHTML = '<i class="fa-regular fa-minus"></i>';
+      deleteBtn.innerHTML = 'x';
       bookLi.textContent = localStorage.getItem(keys[keyLength]);
-      bookLi.setAttribute('onclick', 'searchFunction("' + keys[keyLength] + '");');//uses onclick function to use function that searches the title and reuses it with title as keys[keyLength]
-      bookLi.setAttribute('id', 'title');
-      document.getElementById('bookmarkList').append(bookLi);//creates list item from local storage under ul with id of bookmarkedList
-      document.getElementById('title').append(deleteBtn);
+      bookLi.setAttribute('id', keys[keyLength]);
+      deleteBtn.setAttribute('style', 'display: none; margin: 5px;');
+      deleteBtn.addEventListener("click", function(e){
+        localStorage.removeItem(e.target.parentNode.id);
+        e.target.parentNode.remove();
+      });
+      deleteBtnArray.push(deleteBtn);
+      document.getElementById('bookmarkList').append(bookLi);
+      document.getElementById(keys[keyLength]).append(deleteBtn);
   };
 };
 
 // TRASH FUNCTION
-/* edit btn shows delete list item button */m
-/* edit btn says cancel */
+var visible = false;
 
 function editList() {
   var editBtn = document.getElementById('editList');
   editBtn.innerHTML = "Edit List";
-  editBtn.addEventListener("click", function(e) {
-    e.target.parentNode.remove();
+  editBtn.addEventListener("click", function(e){
+    if(!visible) {
+      visible = true;
+      deleteBtnArray.forEach(element => element.setAttribute('style', 'display: inline;'))
+      editBtn.innerHTML = "Cancel";
+    } else {
+      visible = false;
+      deleteBtnArray.forEach(element => element.setAttribute('style', 'display: none;'))
+      editBtn.innerHTML = "Edit List";
+    }
   });
-}
+};
+
+saveTitle();
+editList();
+keepTitle();

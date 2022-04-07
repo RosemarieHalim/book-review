@@ -351,6 +351,7 @@
     }
   }
 }
+
 /* BOOKMARK */
 
 
@@ -371,6 +372,12 @@
   background-color: rgb(202, 0, 0);
   color: white;
   border-radius: 20px;
+  display: none;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }
   
   
