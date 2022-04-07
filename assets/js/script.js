@@ -12,7 +12,7 @@ function getBookData(bookString) {
           authors: book.volumeInfo.authors[0],
           imageLink: book.volumeInfo.imageLinks.thumbnail,
           description: book.volumeInfo.description,
-           genre: book.volumeInfo.categories[0],
+           //genre: book.volumeInfo.categories[0],
           averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
           published: book.volumeInfo.publishedDate,
           //textSnippet: book.searchInfo.textSnippet,
