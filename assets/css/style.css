@@ -113,28 +113,24 @@
   background: rgb(180, 204, 255);
   height: 100vh;
   width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   opacity: 0;
   transition: all var(--menu-speed) ease;
 }
 .menu > div {
+  display: flex;
   position: relative;
-  top: 0;
+  top: 1rem;
   right: 0;
   height: 100%;
   width: 100%;
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   opacity: 0;
   transition: opacity 0.4s ease-in;
+  text-align: left;
+  padding: 2rem;
+  justify-content: center;
 }
 .menu ul {
+  width: 95%;
   list-style: none;
 }
 .menu li {
@@ -174,10 +170,55 @@
 @media (max-width: 500px) {
   header {
     background: url("./bg-img.jpg") no-repeat 40% center / cover;
+    max-width: 1080px;
+    padding-top: 2rem;
   }
   .menu-wrap .toggler:checked ~ .menu {
     width: 65vw;
   }
+  .menu-wrap .toggler:checked ~ .menu > div {
+    opacity: 1;
+    transition: opacity 0.4s ease-in;
+  }
+  .menu-wrap .toggler:checked ~ .menu > div a {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+  }
+
+  @media (max-width: 500px) {
+    header {
+      background: url("./bg-img.jpg") no-repeat 40% center / cover;
+    }
+    .menu-wrap .toggler:checked ~ .menu {
+      width: 65vw;
+    }
+  }
+}
+
+/* BOOKMARK */
+
+/* TRASH */
+.editBtn {
+  position: fixed;
+  height: 30px;
+  width: 200px;
+  margin: 1rem;
+  bottom: 0;
+  border-radius: 10px;
+  border: 0px;
+}
+
+.delete {
+  height: 20px;
+  width: 20px;
+  background-color: rgb(202, 0, 0);
+  color: white;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* STYLES FOR THE BOOK INFORMATION CARDS*/
@@ -265,40 +306,11 @@
 
 /* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
 
-/* OVERLAY */
-
-/* BOOKMARK */
-
-/* search list of books */
-.book-img {
-  height: 190px;
-}
-
-.book-img:hover {
-  opacity: 0.7;
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-  cursor: pointer;
-}
-
-.book-list-title {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.book-list-title:hover {
-  text-decoration: underline;
-}
-
 /* MODAL STYLING */
-
 .book-mark-icon {
   height: 50px;
   width: 50px;
 }
-
 .book-mark-icon:hover {
   cursor: pointer;
 }

@@ -46,5 +46,7 @@ https://rosemariehalim.github.io/book-review/
 ## Challenge 6.0
 
 * planned out wireframing, API, and frameworks
-* 
-* 
+* Split project into three between group members
+* Researched APIs
+* Set up base html and css
+* Implemented APIs and javascript
