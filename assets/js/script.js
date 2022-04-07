@@ -167,3 +167,35 @@ function formatUserInput(input) {
 //   } //for loop ends
 // };
 //---------------------------------------------------------------------------------------
+
+// BOOKMARK FEATURE
+
+
+// KEEP BOOK FUNCTION
+function keepTitle() {
+  var keys = Object.keys(localStorage);
+  var keyLength = keys.length;
+  while(keyLength--) {
+      var bookLi = document.createElement('li');
+      var deleteBtn = document.createElement('button');
+      deleteBtn.className = "delete";
+      tn.innerHTML = '<i class="fa-regular fa-minus"></i>';
+      bookLi.textContent = localStorage.getItem(keys[keyLength]);
+      bookLi.setAttribute('onclick', 'searchFunction("' + keys[keyLength] + '");');//uses onclick function to use function that searches the title and reuses it with title as keys[keyLength]
+      bookLi.setAttribute('id', 'title');
+      document.getElementById('bookmarkList').append(bookLi);//creates list item from local storage under ul with id of bookmarkedList
+      document.getElementById('title').append(deleteBtn);
+  };
+};
+
+// TRASH FUNCTION
+/* edit btn shows delete list item button */m
+/* edit btn says cancel */
+
+function editList() {
+  var editBtn = document.getElementById('editList');
+  editBtn.innerHTML = "Edit List";
+  editBtn.addEventListener("click", function(e) {
+    e.target.parentNode.remove();
+  });
+}
