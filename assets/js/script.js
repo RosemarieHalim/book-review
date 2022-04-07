@@ -6,7 +6,8 @@ function getBookData(bookString) {
       `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=16`
     ).then((response) => {
       response.json().then((data) => {
-        console.log(data);
+        // console.log(data);
+        getBookClub()
         data.items.forEach((book) => {
           var bookDetails = {
             title: book.volumeInfo.title,
@@ -31,16 +32,15 @@ function getBookData(bookString) {
                 $("#book-info-modal").addClass("is-active")
 
                 var index = $(this).attr("data-index")
-                $(".modal-card-title").text(arrayOfBooks[index].title);
-                $(".modal-summary-body").text(arrayOfBooks[index].description);
-                $(".modal img").attr("src", arrayOfBooks[index].imageLink);
-                $(".modal-tag-author").text(arrayOfBooks[index].authors);
-                $(".modal-tag-pages").text(arrayOfBooks[index].pages);
-                $(".modal-tag-published").text(arrayOfBooks[index].published);
-
+                $("#book-info-modal .modal-card-title").text(arrayOfBooks[index].title);
+                $("#book-info-modal .modal-summary-body").text(arrayOfBooks[index].description);
+                $("#book-info-modal img").attr("src", arrayOfBooks[index].imageLink);
+                $("#book-info-modal .modal-tag-author").text(arrayOfBooks[index].authors);
+                $("#book-info-modal .modal-tag-pages").text(arrayOfBooks[index].pages);
+                $("#book-info-modal .modal-tag-published").text(arrayOfBooks[index].published);
             });
                 //closing the MODAL
-            $(".modal").on("click", ".delete", function(){
+            $("#book-info-modal").on("click", ".delete", function(){
             console.log("you closed the modal")
             $("#book-info-modal").removeClass("is-active")
             }) //end of modal fuctionality
@@ -50,7 +50,7 @@ function getBookData(bookString) {
   
   function createListTwo(bookData) {
     $("#book-list-container").remove();
-    console.log(bookData);
+    // console.log(bookData);
     //create the three main containers for books and add bluma classes
     var mainBookListContainer = $("<div></div>")
       .addClass("container")
@@ -65,7 +65,7 @@ function getBookData(bookString) {
     for (i = 0; i < bookData.length; i++) {
       var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
       var bookImg = $("<img>")
-        .attr("data-index", i) // MODAL modification
+        .attr("data-index", i) // MODAL modification, assigns an index number based on the position 
         .attr("src", bookData[i].imageLink)
         .addClass("shadow list-img hover-book");
       var bookTitle = $("<h2>")
@@ -120,6 +120,30 @@ function getBookData(bookString) {
     return formattedInput;
   }
 
+var moderatorInfo = []
+var getBookClub = function (){
+    // api for a random user
+fetch("https://random-data-api.com/api/users/random_user?size=16").then(
+    (response) => {
+    response.json().then((data) => {
+    //   console.log(data);
+
+      for (i = 0; i<data.length; i++){
+    var userDetails = {
+      name: data[i].first_name +" " + data[i].last_name,
+      email: data[i].email,
+      phone: data[i].phone_number,
+      address: data[i].address.street_address +", "+ data[i].address.state +", "+ data[i].zip_code +", "+ data[i].address.country+".",
+      avatar: data[i].avatar
+        }
+        // console.log(userDetails);
+        moderatorInfo.push(userDetails); //modify this
+    };
+      }); //end of for each loop
+
+    });
+    }
+// )}; 
 
   
   //------------------------------------------------------------------------------
