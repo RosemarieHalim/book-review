@@ -180,6 +180,93 @@
   }
 }
 
+/* STYLES FOR THE BOOK INFORMATION CARDS*/
+
+.book-profiles-container {
+  background: linear-gradient(
+    to right,
+    rgb(110, 150, 167),
+    rgb(145, 165, 173),
+    rgba(74, 74, 255, 0.575)
+  );
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.list-img {
+  height: 180px;
+  width: 130px;
+}
+
+.hover-book:hover {
+  cursor: pointer;
+}
+
+.hover-book-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.book-title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+/* STYLES FOR THE BOOK INFORMATION CARDS*/
+
+.book-profiles-container {
+  background: linear-gradient(
+    to right,
+    rgb(110, 150, 167),
+    rgb(145, 165, 173),
+    rgb(110, 150, 167)
+  );
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.summary-body {
+  display: flex;
+  background-color: aliceblue;
+  align-items: center;
+}
+
+.summary-body p {
+  width: 83%;
+  text-align: center;
+}
+
+.summary-body img {
+  margin: auto;
+  text-align: center;
+}
+
+.book-tags-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.book-tag {
+  width: 20%;
+}
+
+.book-tags-container .book-tag p {
+  font-weight: 700;
+  background-color: rgb(110, 150, 167);
+  border-radius: 15px;
+  color: white;
+}
+
+/* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
+
+/* OVERLAY */
+
 /* BOOKMARK */
 
 /* search list of books */
@@ -203,4 +290,15 @@
 
 .book-list-title:hover {
   text-decoration: underline;
+}
+
+/* MODAL STYLING */
+
+.book-mark-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.book-mark-icon:hover {
+  cursor: pointer;
 }

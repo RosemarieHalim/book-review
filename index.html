@@ -18,8 +18,8 @@
             <!-- logo/home button -->
             <a href="index.html"><img src="./assets/img/logo.png" alt="logo of book" class="logo"></a>
             <!-- search bar -->
-            <form  id="myForm">
-              <input class="input" type="text" placeholder="Title" id="myInput">
+            <form id="myForm">
+            <input id="myInput" class="input" type="text" placeholder="Title">
             </form>
             <!-- hamburger menu -->
             <div class="menu-wrap">
@@ -43,9 +43,45 @@
     <!-- CONTAINER/CONTENT SECTION -->
     <section id="main-book-list-container"></section>
 
+    <!-- MODAL  -->
+    <div class="modal" id="book-info-modal">
+        <div class="modal-backgorund"></div>
+        <div class="modal-card">
+            <header class="modal-card-head has-background-warning">
+
+                <h2 class="modal-card-title"></h2>
+               <img src="/assets/img/bookmark.png" class="book-mark-icon" id="saveBookBtn">
+                <button class="delete"></button>
+            </header>
+            <section class="modal-card-body is-flex is-align-items-center is-justify-content-space-evenly p-3">
+                <p class="modal-summary-body is has-text-justified"></p>
+                    <img class="book-img" alt="book cover">
+            </section>
+            <footer class="is-flex is-justify-content-space-around modal-card-foot">
+                <div>
+                    <p>AUTHOR:</p>
+                    <p class="modal-tag-author">Stats</p>
+                </div>
+                <div>
+                    <p>PAGE COUNT:</p>
+                    <p class="modal-tag-pages">Stats</p>
+                </div>
+                <div>
+                    <p>PUBLISHED:</p>
+                    <p class="modal-tag-published">Stats</p>
+                </div>
+                <div>
+                    <p>STORE:</p>
+                    <p class="modal-tag-buy"><a>Buy It!</a></p>
+                </div>
+            </footer>
+        </div>
+    </div> <!-- END of MODAL -->
+
     <!-- FOOTER SECTION -->
     <footer></footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
+
