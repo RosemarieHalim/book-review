@@ -28,7 +28,6 @@ function getBookData(bookString) {
 
                 //MODAL functionality - generating the content based on the index number
             $("#main-book-list-container").on("click", "img", function(){
-                console.log("Clicked image")
                 $("#book-info-modal").addClass("is-active")
 
                 var index = $(this).attr("data-index")
@@ -74,12 +73,17 @@ function getBookData(bookString) {
       var bookAuthor = $("<h3>")
         .text("Author: " + bookData[i].authors)
         .addClass("hover-book-text");
+    var bookClubBtn = $("<button>") // MODAL modification, button for the book club 
+        .text("Join The Book Club")
+        .attr("data-index", i) // MODAL modification, assigns an index number based on the position 
+        .addClass("button is-warning is-light is-small");
   
       columnsContainer.append(bookContainer);
   
       bookContainer.append(bookImg);
       bookContainer.append(bookTitle);
       bookContainer.append(bookAuthor);
+      bookContainer.append(bookClubBtn); // MODAL modification,
     }
   }
   
@@ -120,9 +124,11 @@ function getBookData(bookString) {
     return formattedInput;
   }
 
-var moderatorInfo = []
+
+  var moderatorInfo = []
+// var moderatorInfo = []
 var getBookClub = function (){
-    // api for a random user
+    // api for a random user 2nd API call
 fetch("https://random-data-api.com/api/users/random_user?size=16").then(
     (response) => {
     response.json().then((data) => {
@@ -136,16 +142,31 @@ fetch("https://random-data-api.com/api/users/random_user?size=16").then(
       address: data[i].address.street_address +", "+ data[i].address.state +", "+ data[i].zip_code +", "+ data[i].address.country+".",
       avatar: data[i].avatar
         }
-        // console.log(userDetails);
-        moderatorInfo.push(userDetails); //modify this
+        console.log(userDetails);
+        moderatorInfo.push(userDetails);
     };
       }); //end of for each loop
+            // Book Club Modal button functionality
+      $("#main-book-list-container").on("click", "button", function (){
+        $("#book-club-modal").addClass("is-active");
 
+        var index = $(this).attr("data-index")
+        // console.log(moderatorInfo[index].name)
+        $("#book-club-modal .modal-card-title").text(moderatorInfo[index].name +" - (Contact Moderator)");
+        $("#book-club-modal img").attr("src", moderatorInfo[index].avatar);
+            // create content for the contact infomration
+        $(".book-club-info").append(
+            $("<p>").text(moderatorInfo[index].email),
+            $("<p>").text(moderatorInfo[index].phone),
+            $("<p>").text(moderatorInfo[index].address))
+      });
+            //closing the modal
+      $("#book-club-modal").on("click", ".delete", function (event){
+        $("#book-club-modal").removeClass("is-active");
+      })
     });
     }
-// )}; 
 
-  
   //------------------------------------------------------------------------------
   // Selecting the section where the book information goes
   // var bookListContainer = document.querySelector(".book-profiles-container"); // container for all the listed books
