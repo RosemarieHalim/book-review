@@ -188,7 +188,6 @@
     opacity: 1;
     transition: opacity 1s ease-in;
   }
-  
   @media (max-width: 500px) {
     header {
       background: url("./bg-img.jpg") no-repeat 40% center / cover;
@@ -197,6 +196,32 @@
       width: 65vw;
     }
   }
+}
+
+/* BOOKMARK */
+
+/* TRASH */
+.editBtn {
+  position: fixed;
+  height: 30px;
+  width: 200px;
+  margin: 1rem;
+  bottom: 0;
+  border-radius: 10px;
+  border: 0px;
+}
+
+.delete {
+  height: 20px;
+  width: 20px;
+  background-color: rgb(202, 0, 0);
+  color: white;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* BOOKMARK */
@@ -431,7 +456,6 @@
   height: 50px;
   width: 50px;
 }
-
 .book-mark-icon:hover {
   cursor: pointer;
 }
