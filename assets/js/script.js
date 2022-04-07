@@ -153,9 +153,9 @@ fetch("https://random-data-api.com/api/users/random_user?size=16").then(
             // create content for the contact infomration
         $(".book-club-info").html("")
         $(".book-club-info").append(
-            $("<p>").text(moderatorInfo[index].email),
-            $("<p>").text(moderatorInfo[index].phone),
-            $("<p>").text(moderatorInfo[index].address))
+            $("<p>").text(moderatorInfo[index].email).addClass("mb-3"),
+            $("<p>").text(moderatorInfo[index].phone).addClass("mb-3"),
+            $("<p>").text(moderatorInfo[index].address).addClass("mb-3"))
       });
             //closing the modal
       $("#book-club-modal").on("click", ".delete", function (event){
