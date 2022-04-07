@@ -44,6 +44,27 @@ function getBookData(userInput) {
             $("#book-info-modal").removeClass("is-active")
             }) //end of modal fuctionality
       });
+      createListTwo(arrayOfBooks);
+
+      //MODAL functionality - generating the content based on the index number
+      $("#main-book-list-container").on("click", "img", function () {
+        console.log("Clicked image");
+        $("#book-info-modal").addClass("is-active");
+
+        var index = $(this).attr("data-index");
+
+        $(".modal-card-title").text(arrayOfBooks[index].title);
+        $(".modal-summary-body").text(arrayOfBooks[index].description);
+        $(".modal .book-img").attr("src", arrayOfBooks[index].imageLink);
+        $(".modal-tag-author").text(arrayOfBooks[index].authors);
+        $(".modal-tag-pages").text(arrayOfBooks[index].pages);
+        $(".modal-tag-published").text(arrayOfBooks[index].published);
+      });
+      //closing the MODAL
+      $(".modal").on("click", ".delete", function () {
+        console.log("you closed the modal");
+        $("#book-info-modal").removeClass("is-active");
+      }); //end of modal fuctionality
     });
   }
   
@@ -212,3 +233,39 @@ function editList() {
 saveTitle();
 editList();
 keepTitle();
+
+
+//start of code to save a book to favorite book list
+$(".modal-card-head").on("click", "#saveBookBtn", function () {
+  console.log($(this));
+  var favoritedBookInfo = {
+    title: $(this).parent().find(".modal-card-title").text(),
+    // author: $(this).parent().find(".author").text(),
+    // image: $(this).parent().find(".img").text(),
+    // description: $(this).parent().find(".description").text(),
+    // reviews: $(this).parent().find(".reviews").text(),
+    // purchaseLink: $(this).parent().find(".purchaselink").text(),
+  };
+  console.log(favoritedBookInfo);
+  saveBook(favoritedBookInfo);
+});
+
+function saveBook(book) {
+  console.log(book);
+  //get the local storage data
+  var existingItems = JSON.parse(localStorage.getItem("books"));
+  //if there is no data set the array to empty
+  if (existingItems === null) existingItems = [];
+  //loop through the array, if the key of an object matches the data id being updated delete the object
+  for (x = 0; x < existingItems.length; x++) {
+    if (existingItems[x].title === book.title) {
+      console.log("this book exists already");
+      existingItems.splice(x, 1);
+    }
+  }
+  //add the data object to the array
+  existingItems.push(book);
+  //set the array in local storage
+  localStorage.setItem("books", JSON.stringify(existingItems));
+  //modal to alert the book is saved goes here
+}

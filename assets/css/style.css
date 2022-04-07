@@ -113,6 +113,10 @@
   background: rgb(180, 204, 255);
   height: 100vh;
   width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   opacity: 0;
   transition: all var(--menu-speed) ease;
 }
@@ -173,165 +177,8 @@
     max-width: 1080px;
     padding-top: 2rem;
   }
-  
-  /* HEADER */
-  .header {
-    background-color: rgb(90, 138, 243);
-    width: 100%;
-    color: white;
-    height: 100px;
-    padding: 25px;
-    position: sticky;
-    top: 0;
-    z-index: 9;
-    text-align: center;
-  }
-  
-  .logo {
-    height: 100px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 25px;
-  }
-  
-  .input {
-    width: 500px;
-    margin: 0 15px;
-  }
-  
-  /* BURGER MENU*/
-  
-  .menu-wrap {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1;
-  }
-  .menu-wrap .toggler {
-    position: absolute;
-    top: 0;
-    right: 0;
-    opacity: 0;
-    height: 50px;
-    width: 50px;
-    cursor: pointer;
-    z-index: 2;
-    margin: 25px;
-  }
-  .menu-wrap .hamburger {
-    position: absolute;
-    margin: 20px;
-    top: 0;
-    right: 0;
-    height: 60px;
-    width: 60px;
-    background: transparent;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-  
-  .menu-wrap .hamburger > div {
-    position: relative;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: white;
-    flex: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.4s;
-  }
-  
-  .menu-wrap .hamburger > div:before,
-  .menu-wrap .hamburger > div:after {
-    content: "";
-    position: absolute;
-    top: 10px;
-    right: 0;
-    background: inherit;
-    height: 4px;
-    width: 100%;
-    z-index: 1;
-  }
-  .menu-wrap .hamburger > div:after {
-    top: -10px;
-  }
-  
-  /* Toggler Animation */
-  .menu-wrap .toggler:checked + .hamburger > div {
-    transform: rotate(135deg);
-  }
-  .menu-wrap .toggler:checked + .hamburger > div:before,
-  .menu-wrap .toggler:checked + .hamburger > div:after {
-    top: 0;
-    transform: rotate(90deg);
-  }
-  
-  .menu-wrap .toggler:checked:hover + .hamburger > div {
-    transform: rotate(90deg);
-  }
-  .menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background: rgb(180, 204, 255);
-    height: 100vh;
-    width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transition: all var(--menu-speed) ease;
-  }
-  .menu > div {
-    position: relative;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    flex: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.4s ease-in;
-  }
-  .menu ul {
-    list-style: none;
-  }
-  .menu li {
-    padding: 1rem 0;
-    color: white;
-  }
-  .menu h2 {
-    font-weight: bold;
-    border-bottom: 2px solid white;
-  }
-  .menu > div a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.5rem;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-  }
-  .menu a:hover {
-    color: rgb(9, 154, 227);
-    transition: color 0.3s ease-in;
-  }
-  
   .menu-wrap .toggler:checked ~ .menu {
-    opacity: 1;
-    width: 30vw;
-    transition: all var(--menu-speed) ease;
+    width: 65vw;
   }
   .menu-wrap .toggler:checked ~ .menu > div {
     opacity: 1;
@@ -462,9 +309,129 @@
   
 /* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
 
+/* STYLES FOR THE BOOK INFORMATION CARDS*/
+
+.book-profiles-container {
+  background: linear-gradient(
+    to right,
+    rgb(110, 150, 167),
+    rgb(145, 165, 173),
+    rgba(74, 74, 255, 0.575)
+  );
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.list-img {
+  height: 180px;
+  width: 130px;
+}
+
+.hover-book:hover {
+  cursor: pointer;
+}
+
+.hover-book-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.book-title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+/* STYLES FOR THE BOOK INFORMATION CARDS*/
+
+.book-profiles-container {
+  background: linear-gradient(
+    to right,
+    rgb(110, 150, 167),
+    rgb(145, 165, 173),
+    rgb(110, 150, 167)
+  );
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.summary-body {
+  display: flex;
+  background-color: aliceblue;
+  align-items: center;
+}
+
+.summary-body p {
+  width: 83%;
+  text-align: center;
+}
+
+.summary-body img {
+  margin: auto;
+  text-align: center;
+}
+
+.book-tags-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.book-tag {
+  width: 20%;
+}
+
+.book-tags-container .book-tag p {
+  font-weight: 700;
+  background-color: rgb(110, 150, 167);
+  border-radius: 15px;
+  color: white;
+}
+
+/* END OF THE STYLES FOR THE BOOK INFORMATION CARDS*/
+
+/* OVERLAY */
+
+/* BOOKMARK */
+
+/* search list of books */
+.book-img {
+  height: 190px;
+}
+
+.book-img:hover {
+  opacity: 0.7;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  cursor: pointer;
+}
+
+.book-list-title {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.book-list-title:hover {
+  text-decoration: underline;
+}
 
    /* MODAL STYLING */
-.modal {
+   .modal {
     background: linear-gradient(rgba(110, 150, 167, 0.7), rgba(74, 74, 255, 0.575));
 }
    /* END OF MODAL STYLING */
+
+.book-mark-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.book-mark-icon:hover {
+  cursor: pointer;
+}
