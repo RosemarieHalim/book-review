@@ -1,55 +1,115 @@
-//API call
-function getBookData(bookString) {
-  // saves the values of the data retreived fomr the call
-  var arrayOfBooks = [];
-  fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookString}&printType=books&maxResults=16`
-  ).then((response) => {
-    response.json().then((data) => {
-      data.items.forEach((book) => {
-        var bookDetails = {
-          title: book.volumeInfo.title,
-          authors: book.volumeInfo.authors[0],
-          imageLink: book.volumeInfo.imageLinks.thumbnail,
-          description: book.volumeInfo.description,
-          //genre: book.volumeInfo.categories[0],
-          averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
-          published: book.volumeInfo.publishedDate,
-          //textSnippet: book.searchInfo.textSnippet,
-          // isbn: book.items[0].volumeInfo.industryIdentifiers[1].industryIdentifier
-          pages: book.volumeInfo.pageCount, //MODAL modification
-        };
-        arrayOfBooks.push(bookDetails);
-        //createList();
-      });
-      createListTwo(arrayOfBooks);
+var arrayOfBooks = [];
+// listen for a submit event on the form
+$("#myForm").on("submit", function (event) {
+  //prevent the form from submitting
+  event.preventDefault();
+  //check if the input value is empty before continuing
+  if ($("#myInput").val()) {
+    //capture the users input
+    var userInput = $("#myInput").val().trim().split(" ").join("+");
+    getBookData(userInput);
+  }
+});
 
-      //MODAL functionality - generating the content based on the index number
-      $("#main-book-list-container").on("click", "img", function () {
-        console.log("Clicked image");
-        $("#book-info-modal").addClass("is-active");
+$("#main-book-list-container").on("click", "img", function () {
+  //if the img clicked has an id of errorEl it is the no results img, so on click dont display the info modal
+  if ($(this).attr("id") === "errorEl") {
+    return;
+  }
+  $("#book-info-modal").addClass("is-active");
 
-        var index = $(this).attr("data-index");
-        $(".modal-card-title").text(arrayOfBooks[index].title);
-        $(".modal-summary-body").text(arrayOfBooks[index].description);
-        $(".modal .book-img").attr("src", arrayOfBooks[index].imageLink);
-        $(".modal-tag-author").text(arrayOfBooks[index].authors);
-        $(".modal-tag-pages").text(arrayOfBooks[index].pages);
-        $(".modal-tag-published").text(arrayOfBooks[index].published);
-      });
-      //closing the MODAL
-      $(".modal").on("click", ".delete", function () {
-        console.log("you closed the modal");
-        $("#book-info-modal").removeClass("is-active");
-      }); //end of modal fuctionality
-    });
+  var index = $(this).attr("data-index");
+  // $(".book-mark-icon").attr("src", "./assets/img/bookmark.png");
+
+  $("#book-info-modal .modal-card-title").text(arrayOfBooks[index].title);
+  $("#book-info-modal .modal-summary-body").text(
+    arrayOfBooks[index].description
+  );
+  $("#book-info-modal .book-img").attr("src", arrayOfBooks[index].imageLink);
+  $("#book-info-modal .modal-tag-author").text(arrayOfBooks[index].authors);
+  $("#book-info-modal .modal-tag-pages").text(arrayOfBooks[index].pages);
+  $("#book-info-modal .modal-tag-published").text(
+    arrayOfBooks[index].published
+  );
+  $(".modal-tag-buy a").attr("href", arrayOfBooks[index].link);
+
+  var bookExistingTitles = JSON.parse(localStorage.getItem("books"));
+  $("#saveBookBtn").attr("src", "./assets/img/bookmark.png");
+
+  bookExistingTitles.forEach((book) => {
+    if (
+      $("#book-info-title").text() == book.title &&
+      $(".modal-summary-body").text() === book.description
+    ) {
+      $("#saveBookBtn").attr("src", "./assets/img/bookmark-clicked.png");
+    }
   });
+});
+//closing the MODAL
+$("#book-info-modal").on("click", ".delete", function () {
+  $("#book-info-modal").removeClass("is-active");
+}); //end of modal fuctionality
+
+//API call
+function getBookData(userInput) {
+  // saves the values of the data retreived fomr the call
+  arrayOfBooks = [];
+  fetch(
+    "https://www.googleapis.com/books/v1/volumes?q=intitle:" +
+      userInput +
+      "&printType=books&maxResults=16"
+  ).then((response) => {
+    response
+      .json()
+      .then((data) => {
+        getBookClub(); //fetched the API call for random user information
+        data.items.forEach((book) => {
+          var bookDetails = {
+            title: book.volumeInfo.title,
+            authors: book.volumeInfo.authors[0] ?? "No Author Found",
+            imageLink:
+              book.volumeInfo.imageLinks.thumbnail ??
+              "./assets/img/no-cover.svg",
+            description: book.volumeInfo.description,
+            averageRating: book.volumeInfo.averageRating + " Out Of 5 Stars",
+            published: book.volumeInfo.publishedDate,
+            link: book.volumeInfo.infoLink,
+            textSnippet: book.searchInfo.textSnippet,
+            pages: book.volumeInfo.pageCount, //MODAL modification
+          };
+          arrayOfBooks.push(bookDetails);
+        });
+
+        createListTwo(arrayOfBooks);
+      })
+      .catch((err) => {
+        if (arrayOfBooks.length === 0) {
+          $("#main-book-list-container").html("");
+          userInput = userInput.split("+").join(" ");
+          var errorMsg = $("<h2>")
+            .text("Oops, no results for '" + userInput + "',  please try again")
+            .addClass("is-size-4 mt-5");
+          var errorDivContainer = $("<div>").addClass(
+            "is-flex is-flex-direction-column is-justify-content-center is-align-items-center"
+          );
+          var errorImg = $("<img>").attr({
+            src: "/assets/img/no-results.jpg",
+            id: "errorEl",
+          });
+
+          $("#main-book-list-container").append(errorDivContainer);
+          errorDivContainer.append(errorMsg);
+          errorDivContainer.append(errorImg);
+        } else createListTwo(arrayOfBooks);
+      });
+  });
+  //MODAL functionality - generating the content based on the index number
 }
 
 function createListTwo(bookData) {
-  $("#book-list-container").remove();
-
-  //create the three main containers for books and add bluma classes
+  //remove all content from the main section before adding anything new
+  $("#main-book-list-container").html("");
+  //create the three main containers for books and add bulma classes
   var mainBookListContainer = $("<div></div>")
     .addClass("container")
     .attr("id", "book-list-container");
@@ -59,7 +119,7 @@ function createListTwo(bookData) {
   $("#main-book-list-container").append(mainBookListContainer);
   mainBookListContainer.append(columnsContainer);
 
-  //loop through the book array
+  //loop through the book array nad create elements for each book result
   for (i = 0; i < bookData.length; i++) {
     var bookContainer = $("<div>").addClass("column is-6-tablet is-3-desktop");
     var bookImg = $("<img>")
@@ -72,12 +132,17 @@ function createListTwo(bookData) {
     var bookAuthor = $("<h3>")
       .text("Author: " + bookData[i].authors)
       .addClass("hover-book-text");
+    var bookClubBtn = $("<button>") // MODAL modification, button for the book club
+      .text("Join The Book Club")
+      .attr("data-index", i) // MODAL modification, assigns an index number based on the position
+      .addClass("button is-warning is-light is-small");
 
     columnsContainer.append(bookContainer);
 
     bookContainer.append(bookImg);
     bookContainer.append(bookTitle);
     bookContainer.append(bookAuthor);
+    bookContainer.append(bookClubBtn); // MODAL modification apppends book club button,
   }
 }
 
@@ -86,32 +151,62 @@ function burger(x) {
   x.classList.toggle("change");
 }
 
-$("#myForm").on("submit", function (event) {
-  //prevent the form from submitting
-  event.preventDefault();
-  //check if the input value is empty before continuing
-  if ($("#myInput").val()) {
-    //capture the users input
-    var userInput = $("#myInput").val().trim();
-    //clear the form input
-    $("#myInput").val("");
-    //call format user input
-    userInput = formatUserInput(userInput);
-    getBookData(userInput);
-  }
-});
+// var moderatorInfo = []
+var getBookClub = function () {
+  var moderatorInfo = []; // MODAL book Club - hold the data for the random user generatoior
+  // api for a random user 2nd API call
+  fetch("https://random-data-api.com/api/users/random_user?size=16").then(
+    (response) => {
+      response.json().then((data) => {
+        for (i = 0; i < data.length; i++) {
+          var userDetails = {
+            name: data[i].first_name + " " + data[i].last_name,
+            email: data[i].email,
+            phone: data[i].phone_number,
+            address:
+              data[i].address.street_address +
+              ", " +
+              data[i].address.state +
+              ", " +
+              data[i].zip_code +
+              ", " +
+              data[i].address.country +
+              ".",
+            avatar: data[i].avatar,
+          };
+          moderatorInfo.push(userDetails);
+        }
+      }); //end of for each loop
+      // Book Club Modal button functionality
+      $("#main-book-list-container").on("click", "button", function () {
+        $("#book-club-modal").addClass("is-active");
 
-function formatUserInput(input) {
-  //turn the string into an array and join it with "+"
-  var inputAsArray = input.split(" ");
-  return inputAsArray.join("+");
-}
+        var index = $(this).attr("data-index");
+        $("#book-club-modal .modal-card-title").text(
+          moderatorInfo[index].name + " - (Contact Moderator)"
+        );
+        $("#book-club-modal img").attr("src", moderatorInfo[index].avatar);
+        // create content for the contact infomration
+        $(".book-club-info").html("");
+        $(".book-club-info").append(
+          $("<p>").text(moderatorInfo[index].email).addClass("mb-3"),
+          $("<p>").text(moderatorInfo[index].phone).addClass("mb-3"),
+          $("<p>").text(moderatorInfo[index].address).addClass("mb-3")
+        );
+      });
+      //closing the modal
+      $("#book-club-modal").on("click", ".delete", function (event) {
+        $("#book-club-modal").removeClass("is-active");
+      });
+    }
+  );
+}; //end of MODAL functionality for Book Club
 
 //start of code to save a book to favorite book list
 $(".modal-card-head").on("click", "#saveBookBtn", function () {
-  console.log($(".modal-summary-body").text());
+  $("#saveBookBtn").attr("src", "./assets/img/bookmark-clicked.png");
   var favoritedBookInfo = {
-    title: $(".modal-card-title").text(),
+    title: $("#book-info-modal .modal-card-title").text(),
     author: $(".modal-tag-author").text(),
     description: $(".modal-summary-body").text(),
     pageCount: $(".modal-tag-pages").text(),
@@ -119,31 +214,31 @@ $(".modal-card-head").on("click", "#saveBookBtn", function () {
     published: $(".modal-tag-published").text(),
     imgLink: $(".book-img").attr("src"),
   };
-  console.log(favoritedBookInfo);
+
   saveBook(favoritedBookInfo);
 });
 
 function saveBook(book) {
-  console.log(book);
   //get the local storage data
   var existingItems = JSON.parse(localStorage.getItem("books"));
   //if there is no data set the array to empty
   if (existingItems === null) existingItems = [];
   //loop through the array, if the key of an object matches the data id being updated delete the object
   for (x = 0; x < existingItems.length; x++) {
-    if (existingItems[x].title === book.title) {
+    if (
+      existingItems[x].title === book.title &&
+      existingItems[x].description === book.description
+    ) {
       existingItems.splice(x, 1);
     }
   }
   //add the data object to the array
   existingItems.push(book);
-  console.log(existingItems);
+
   //set the array in local storage
   localStorage.setItem("books", JSON.stringify(existingItems));
   //modal to alert the book is saved goes here
 }
-
-// BOOKMARK FEATURE
 
 // KEEP BOOK FUNCTION
 var deleteBtn = document.createElement("button");
@@ -155,7 +250,7 @@ function keepTitle() {
   while (keyLength--) {
     var bookLi = document.createElement("li");
     var deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete";
+    deleteBtn.className = "erase";
     deleteBtn.innerHTML = "x";
     bookLi.textContent = localStorage.getItem(keys[keyLength]);
     bookLi.setAttribute("id", keys[keyLength]);
@@ -193,6 +288,6 @@ function editList() {
   });
 }
 
-//saveTitle();
+// saveTitle();
 editList();
 keepTitle();

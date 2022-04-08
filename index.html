@@ -4,77 +4,130 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+
     <link rel="stylesheet" href="./assets/css/style.css" />
+
     <title>Book Club | Home</title>
   </head>
   <body>
     <!-- HEADER SECTION -->
     <header>
-        <div class="row header">
-            <!-- logo/home button -->
-            <a href="index.html"><img src="./assets/img/logo.png" alt="logo of book" class="logo"></a>
-            <!-- search bar -->
-            <form id="myForm">
-            <input id="myInput" class="input" type="text" placeholder="Title">
-            </form>
-            <!-- hamburger menu -->
-            <div class="menu-wrap">
-                <input type="checkbox" class="toggler" />
-                <div class="hamburger">
-                  <div></div>
-                </div>
-                <div class="menu">
-                  <div>
-                    <ul class="bookmarkList" id="bookmarkList">
-                        <li><h2>Bookmarks</h2></li>
-                    </ul>
-                    <button class="editBtn" id="editList">Edit List</button>
-                </div>
-              </div>
+      <div class="row header">
+        <!-- logo/home button -->
+        <a href="index.html"
+          ><img src="./assets/img/logo.png" alt="logo of book" class="logo"
+        /></a>
+        <!-- search bar -->
+        <form id="myForm">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            id="myInput"
+            class="input"
+            type="text"
+            placeholder="Search for a book..."
+          />
+        </form>
+        <!-- hamburger menu -->
+        <div class="menu-wrap">
+          <input type="checkbox" class="toggler" />
+          <div class="hamburger">
+            <div></div>
+          </div>
+          <div class="menu">
+            <div>
+              <ul class="bookmarkList" id="bookmarkList">
+                <li><h2>Bookmarks</h2></li>
+              </ul>
+              <button class="editBtn" id="editList">Edit List</button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
-
     <!-- CONTAINER/CONTENT SECTION -->
     <section id="main-book-list-container"></section>
     <!-- in each book have button with img in it with onclick="searchTitle()" -->
 
-    <!-- MODAL  -->
+    <!-- MODAL FOR BOOK INFO -->
     <div class="modal" id="book-info-modal">
-        <div class="modal-backgorund"></div>
-        <div class="modal-card">
-            <header class="modal-card-head has-background-warning">
+      <div class="modal-backgorund"></div>
+      <div class="modal-card">
+        <header class="modal-card-head has-background-warning">
+          <h2 class="modal-card-title" id="book-info-title"></h2>
+          <img
+            src="./assets/img/bookmark.png"
+            class="book-mark-icon"
+            id="saveBookBtn"
+          />
+          <button class="delete"></button>
+        </header>
+        <section
+          class="modal-card-body is-flex is-align-items-center is-justify-content-space-evenly p-3"
+        >
+          <p class="modal-summary-body is has-text-justified mr-4"></p>
+          <img class="book-img" alt="book cover" />
+        </section>
+        <footer
+          class="is-flex is-justify-content-space-around modal-card-foot has-background-warning-light"
+        >
+          <div>
+            <p>AUTHOR:</p>
+            <p class="modal-tag-author">Stats</p>
+          </div>
+          <div>
+            <p>PAGE COUNT:</p>
+            <p class="modal-tag-pages">Stats</p>
+          </div>
+          <div>
+            <p>PUBLISHED:</p>
+            <p class="modal-tag-published">Stats</p>
+          </div>
+          <div>
+            <p>STORE:</p>
+            <p class="modal-tag-buy"><a target="_blank">Buy It!</a></p>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- END of MODAL for BOOK INFO -->
 
-                <h2 class="modal-card-title"></h2>
-               <img src="/assets/img/bookmark.png" class="book-mark-icon" id="saveBookBtn">
-                <button class="delete"></button>
-            </header>
-            <section class="modal-card-body is-flex is-align-items-center is-justify-content-space-evenly p-3">
-                <p class="modal-summary-body is has-text-justified"></p>
-                    <img class="book-img" alt="book cover">
-            </section>
-            <footer class="is-flex is-justify-content-space-around modal-card-foot">
-                <div>
-                    <p>AUTHOR:</p>
-                    <p class="modal-tag-author">Stats</p>
-                </div>
-                <div>
-                    <p>PAGE COUNT:</p>
-                    <p class="modal-tag-pages">Stats</p>
-                </div>
-                <div>
-                    <p>PUBLISHED:</p>
-                    <p class="modal-tag-published">Stats</p>
-                </div>
-                <div>
-                    <p>STORE:</p>
-                    <p class="modal-tag-buy"><a>Buy It!</a></p>
-                </div>
-            </footer>
-        </div>
-    </div> <!-- END of MODAL -->
+    <!-- MODAL FOR BOOK CLUB -->
+    <div class="modal" id="book-club-modal">
+      <div class="modal-backgorund"></div>
+      <div class="modal-card">
+        <header class="modal-card-head has-background-danger">
+          <h2 class="modal-card-title"></h2>
+          <!-- <img  alt="book cover" class="p-2"> -->
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section
+          class="modal-card-body is-flex is-align-items-center is-justify-content-space-evenly p-3"
+        >
+          <div class="book-club-tags is-justify-content-end ml-2">
+            <p class="mb-3">Email:</p>
+            <p class="mb-3">Phone Number:</p>
+            <p class="mb-3">Address:</p>
+          </div>
+          <div class="book-club-info"></div>
+        </section>
+      </div>
+    </div>
+    <!-- END of MODAL for BOOK CLUB -->
 
     <!-- FOOTER SECTION -->
     <footer></footer>
@@ -84,4 +137,3 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
-
