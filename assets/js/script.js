@@ -1,6 +1,6 @@
 var arrayOfBooks = [];
 // listen for a submit event on the form
-$("#myForm").on("submit", function (event) {
+$("#myForm").on("click", ".search-btn", function (event) {
   //prevent the form from submitting
   event.preventDefault();
   //check if the input value is empty before continuing
