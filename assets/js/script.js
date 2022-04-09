@@ -205,6 +205,7 @@ var getBookClub = function () {
 //start of code to save a book to favorite book list
 $(".modal-card-head").on("click", "#saveBookBtn", function () {
   $("#saveBookBtn").attr("src", "./assets/img/bookmark-clicked.png");
+
   var favoritedBookInfo = {
     title: $("#book-info-modal .modal-card-title").text(),
     author: $(".modal-tag-author").text(),
@@ -212,7 +213,7 @@ $(".modal-card-head").on("click", "#saveBookBtn", function () {
     pageCount: $(".modal-tag-pages").text(),
     purchaseLink: $(".modal-tag-buy").text(),
     published: $(".modal-tag-published").text(),
-    imgLink: $(".book-img").attr("src"),
+    imgLink: $(this).parent().parent().find(".book-img").attr("src"),
   };
 
   saveBook(favoritedBookInfo);
@@ -237,57 +238,83 @@ function saveBook(book) {
 
   //set the array in local storage
   localStorage.setItem("books", JSON.stringify(existingItems));
-  //modal to alert the book is saved goes here
+
+  displayReadingList();
 }
 
-// KEEP BOOK FUNCTION
-var deleteBtn = document.createElement("button");
-var deleteBtnArray = [];
+// // KEEP BOOK FUNCTION
+// var deleteBtn = document.createElement("button");
+// var deleteBtnArray = [];
 
-function keepTitle() {
-  var keys = Object.keys(localStorage);
-  var keyLength = keys.length;
-  while (keyLength--) {
-    var bookLi = document.createElement("li");
-    var deleteBtn = document.createElement("button");
-    deleteBtn.className = "erase";
-    deleteBtn.innerHTML = "x";
-    bookLi.textContent = localStorage.getItem(keys[keyLength]);
-    bookLi.setAttribute("id", keys[keyLength]);
-    deleteBtn.setAttribute("style", "display: none; margin: 5px;");
-    deleteBtn.addEventListener("click", function (e) {
-      localStorage.removeItem(e.target.parentNode.id);
-      e.target.parentNode.remove();
-    });
-    deleteBtnArray.push(deleteBtn);
-    document.getElementById("bookmarkList").append(bookLi);
-    document.getElementById(keys[keyLength]).append(deleteBtn);
+// function keepTitle() {
+//   console.log("f")
+//   var keys = Object.keys(localStorage);
+//   var keyLength = keys.length;
+//   while (keyLength--) {
+//     var bookLi = document.createElement("li");
+//     var deleteBtn = document.createElement("button");
+//     deleteBtn.className = "erase";
+//     deleteBtn.innerHTML = "x";
+//     bookLi.textContent = localStorage.getItem(keys[keyLength]);
+//     bookLi.setAttribute("id", keys[keyLength]);
+//     deleteBtn.setAttribute("style", "display: none; margin: 5px;");
+//     deleteBtn.addEventListener("click", function (e) {
+//       localStorage.removeItem(e.target.parentNode.id);
+//       e.target.parentNode.remove();
+//     });
+//     deleteBtnArray.push(deleteBtn);
+//     document.getElementById("bookmarkList").append(bookLi);
+//     document.getElementById(keys[keyLength]).append(deleteBtn);
+//   }
+// }
+
+// // TRASH FUNCTION
+// var visible = false;
+
+// function editList() {
+//   console.log("g")
+//   var editBtn = document.getElementById("editList");
+//   editBtn.innerHTML = "Edit List";
+//   editBtn.addEventListener("click", function (e) {
+//     if (!visible) {
+//       visible = true;
+//       deleteBtnArray.forEach((element) =>
+//         element.setAttribute("style", "display: inline;")
+//       );
+//       editBtn.innerHTML = "Cancel";
+//     } else {
+//       visible = false;
+//       deleteBtnArray.forEach((element) =>
+//         element.setAttribute("style", "display: none;")
+//       );
+//       editBtn.innerHTML = "Edit List";
+//     }
+//   });
+// }
+
+// editList();
+// keepTitle();
+
+function displayReadingList() {
+  var books = JSON.parse(localStorage.getItem("books"));
+  if (books === null) {
+    return;
+    // you have no books bookmarked!
+  }
+  for (i = 0; i < books.length; i++) {
+    var hr = $("<hr>").css("color", "white");
+    var bmListContainer = $("<div>").addClass(
+      "is-flex is-flex-direction-column is-justify-content-center is-align-items-center mb-3"
+    );
+
+    var bmListImage = $("<img>").attr("src", books[i].imgLink);
+    var bmListTitle = $("<h2>")
+      .addClass("mb-2 has-text-centered is-capitalized")
+      .text(books[i].title);
+    $("#bookmarkList").append(bmListContainer);
+    bmListContainer.append(bmListTitle);
+    bmListContainer.append(bmListImage);
+    bmListContainer.after(hr);
   }
 }
-
-// TRASH FUNCTION
-var visible = false;
-
-function editList() {
-  var editBtn = document.getElementById("editList");
-  editBtn.innerHTML = "Edit List";
-  editBtn.addEventListener("click", function (e) {
-    if (!visible) {
-      visible = true;
-      deleteBtnArray.forEach((element) =>
-        element.setAttribute("style", "display: inline;")
-      );
-      editBtn.innerHTML = "Cancel";
-    } else {
-      visible = false;
-      deleteBtnArray.forEach((element) =>
-        element.setAttribute("style", "display: none;")
-      );
-      editBtn.innerHTML = "Edit List";
-    }
-  });
-}
-
-// saveTitle();
-editList();
-keepTitle();
+//displayReadingList();
