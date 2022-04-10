@@ -22,7 +22,7 @@ $("#main-book-list-container, #bookmarkList").on("click", "img", function () {
   $("#book-info-modal").addClass("is-active");
 
   var index = $(this).attr("data-index");
-  //console.log(index)
+
   // $(".book-mark-icon").attr("src", "./assets/img/bookmark.png");
 
   $("#book-info-modal .modal-card-title").text(arrayOfBooks[index].title);
@@ -262,6 +262,8 @@ function displayReadingList(index) {
   if (!books) return;
 
   for (i = 0; i < books.length; i++) {
+    var deleteBtn = document.createElement("button");
+
     var hr = $("<hr>");
     var bmListContainer = $("<div>")
       .addClass(
@@ -295,7 +297,6 @@ displayReadingList();
 
 $("#clear-list").click(() => {
   localStorage.clear();
-
   $(".list-container").remove();
   $("#bookmarkList").find("hr").remove();
 });
