@@ -223,6 +223,7 @@ $(".modal-card-head").on("click", "#saveBookBtn", function () {
     imgLink: $(this).parent().parent().find(".book-img").attr("src"),
     dataIndex: $("#book-info-modal .book-img").attr("data-index"),
   };
+  console.log(favoritedBookInfo);
   saveBook(favoritedBookInfo);
 });
 
@@ -251,6 +252,7 @@ function saveBook(book) {
 }
 
 function displayReadingList(index) {
+  console.log(index);
   var books = JSON.parse(localStorage.getItem("books"));
 
   var array = $(".title-for-list")
