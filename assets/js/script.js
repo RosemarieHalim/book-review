@@ -244,6 +244,7 @@ function saveBook(book) {
 
 // // KEEP BOOK FUNCTION
 // var deleteBtn = document.createElement("button");
+<<<<<<< HEAD
 // var deleteBtnArray = [];
 
 // function keepTitle() {
@@ -318,3 +319,104 @@ function displayReadingList() {
   }
 }
 //displayReadingList();
+=======
+
+// function keepTitle() {
+//   var keys = Object.keys(localStorage);
+//   var keyLength = keys.length;
+//   while (keyLength--) {
+//     var bookLi = document.createElement("li");
+//
+//     deleteBtn.className = "erase";
+//     deleteBtn.innerHTML = "x";
+//     bookLi.innerHTML = displayBook(keys, keyLength);
+//     bookLi.setAttribute("id", keys[keyLength]);
+//     deleteBtn.setAttribute("style", "display: none; margin: 5px;");
+//     deleteBtn.addEventListener("click", function (e) {
+//       localStorage.removeItem(e.target.parentNode.id);
+//       e.target.parentNode.remove();
+//     });
+//     deleteBtnArray.push(deleteBtn);
+//     document.getElementById("bookmarkList").append(bookLi);
+//     document.getElementById(keys[keyLength]).append(deleteBtn);
+//   }
+// }
+
+// keepTitle();
+
+var deleteBtnArray = [];
+
+function displayReadingList() {
+  var books = JSON.parse(localStorage.getItem("books"));
+  console.log(books);
+  var array = $(".title-for-list")
+    .map(function () {
+      return $.trim($(this).text());
+    })
+    .get();
+  console.log(array);
+  if (!books) return;
+
+  for (i = 0; i < books.length; i++) {
+    var deleteBtn = document.createElement("button");
+    deleteBtn.className = "erase";
+    deleteBtn.innerHTML = "x";
+    deleteBtn.setAttribute("style", "display: none; margin: 5px;");
+
+    deleteBtnArray.push(deleteBtn);
+    var hr = $("<hr>");
+    var bmListContainer = $("<div>").addClass(
+      "is-flex is-flex-direction-column is-justify-content-center is-align-items-center mb-3"
+    );
+    var bmListImage = $("<img>").attr("src", books[i].imgLink);
+    var bmListTitle = $("<h2>")
+      .addClass(
+        "mb-2 has-text-centered is-capitalized title-for-list no-border"
+      )
+      .text(books[i].title);
+    $("#bookmarkList").append(bmListContainer);
+    bmListContainer.append(bmListTitle);
+    bmListContainer.append(deleteBtn);
+    bmListContainer.append(bmListImage);
+    bmListContainer.after(hr);
+    for (x = 0; x < array.length; x++) {
+      if (array[x] === books[i].title) {
+        bmListContainer.remove();
+        hr.remove();
+      }
+    }
+    deleteBtn.addEventListener("click", function (e) {
+      console.log("click");
+      console.log(e.target.parentNode);
+      localStorage.removeItem(e.target.parentNode.id);
+      e.target.parentNode.remove();
+    });
+  }
+}
+
+displayReadingList();
+
+// TRASH FUNCTION
+var visible = false;
+
+function editList() {
+  var editBtn = document.getElementById("editList");
+  editBtn.innerHTML = "Edit List";
+  editBtn.addEventListener("click", function (e) {
+    if (!visible) {
+      visible = true;
+      deleteBtnArray.forEach((element) =>
+        element.setAttribute("style", "display: inline;")
+      );
+      editBtn.innerHTML = "Cancel";
+    } else {
+      visible = false;
+      deleteBtnArray.forEach((element) =>
+        element.setAttribute("style", "display: none;")
+      );
+      editBtn.innerHTML = "Edit List";
+    }
+  });
+}
+editList();
+>>>>>>> develop

@@ -7,6 +7,10 @@
   width: fit-content;
 }
 
+.no-border {
+  border: none !important;
+}
+
 /* HEADER */
 .header {
   background-color: rgb(90, 138, 243);
@@ -33,7 +37,7 @@
   margin: 0 15px;
 }
 
-.text-underline{
+.text-underline {
   text-decoration: underline;
 }
 .fa-solid {
@@ -133,7 +137,7 @@
   text-align: center;
   opacity: 0;
   transition: all var(--menu-speed) ease;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .menu > div {
   display: flex;
