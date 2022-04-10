@@ -1,4 +1,5 @@
-#   Collaborative Project: Book Club Reading List
+#  Book Club and Reading List App
+---
 
 ![Home Page](./assets/img/snapshot1.jpg)
 
@@ -17,7 +18,7 @@ There is also a bookmark button to add the book to the readlist which is under t
 
 
 ## Acceptance Criteria
-
+```
 GIVEN a book dashboard with form inputs and hamburger menu
 WHEN I search for a book title
 THEN I am presented with the book summary, aditional infomration about the book and a link to buying options.
@@ -30,6 +31,9 @@ WHEN I click on home
 THEN I am presented with homepage
 WHEN I click on the "join book club"
 THEN I am presented with the contact infomration from a book club moderator.
+```
+
+![](./assets/img/snapshot.jpg)
 
 ---
 
