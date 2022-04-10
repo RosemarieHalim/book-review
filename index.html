@@ -34,14 +34,16 @@
         /></a>
         <!-- search bar -->
         <form id="myForm">
-            <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input
             id="myInput"
             class="input"
             type="text"
             placeholder="Search for a book..."
           />
-            <button class="search-btn button is-warning is-light" type="submit">Search</button>
+          <button class="search-btn button is-warning is-light" type="submit">
+            Search
+          </button>
         </form>
         <!-- hamburger menu -->
         <div class="menu-wrap">
@@ -52,16 +54,34 @@
           <div class="menu">
             <div>
               <ul class="bookmarkList" id="bookmarkList">
+                <button class="button is-danger is-light" id="clear-list">
+                  Clear List
+                </button>
                 <li><h2>Bookmarks</h2></li>
+                <h1
+                  class="has-text-centered is-size-5"
+                  id="book-mark-placeholder"
+                >
+                  You have no saved books
+                </h1>
               </ul>
-              <button class="editBtn" id="editList">Edit List</button>
+              <!-- <button class="editBtn" id="editList">Edit List</button> -->
             </div>
           </div>
         </div>
       </div>
     </header>
     <!-- CONTAINER/CONTENT SECTION -->
-    <section id="main-book-list-container"></section>
+    <section id="main-book-list-container">
+      <div class="is-flex is-justify-content-center">
+        <img
+          src="./assets/img/landing-img.png"
+          alt="books with cup of coffee"
+          class="landing-img"
+          id="book-club-img"
+        />
+      </div>
+    </section>
     <!-- in each book have button with img in it with onclick="searchTitle()" -->
 
     <!-- MODAL FOR BOOK INFO -->
@@ -69,7 +89,10 @@
       <div class="modal-backgorund"></div>
       <div class="modal-card">
         <header class="modal-card-head has-background-warning is-flex">
-            <h2 class="modal-card-title is-flex-shrink-1 px-4" id="book-info-title"></h2>
+          <h2
+            class="modal-card-title is-flex-shrink-1 px-4"
+            id="book-info-title"
+          ></h2>
           <img
             src="./assets/img/bookmark.png"
             class="book-mark-icon"

@@ -22,6 +22,7 @@
   top: 0;
   z-index: 9;
   text-align: center;
+  height: fit-content;
 }
 
 .logo {
@@ -220,7 +221,7 @@
 /* BOOKMARK */
 
 /* TRASH */
-.editBtn {
+/* .editBtn {
   position: fixed;
   height: 30px;
   width: 200px;
@@ -228,8 +229,8 @@
   bottom: 0;
   border-radius: 10px;
   border: 0px;
-}
-
+} */
+/* 
 .delete {
   height: 20px;
   width: 20px;
@@ -237,7 +238,7 @@
   color: white;
   border-radius: 20px;
   margin-left: 10px;
-}
+} */
 
 .hidden {
   display: none;
@@ -246,7 +247,7 @@
 /* BOOKMARK */
 
 /* TRASH */
-.editBtn {
+/* .editBtn {
   position: fixed;
   height: 30px;
   width: 200px;
@@ -254,9 +255,9 @@
   bottom: 0;
   border-radius: 10px;
   border: 0px;
-}
+} */
 
-.erase {
+/* .erase {
   height: 20px;
   width: 20px;
   background-color: rgb(202, 0, 0);
@@ -264,7 +265,7 @@
   border-radius: 20px;
   display: none;
   margin-left: 10px;
-}
+} */
 
 .hidden {
   display: none;

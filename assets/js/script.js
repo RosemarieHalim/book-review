@@ -11,21 +11,28 @@ $("#myForm").on("submit", function (event) {
   }
 });
 
-$("#main-book-list-container").on("click", "img", function () {
+$("#main-book-list-container, #bookmarkList").on("click", "img", function () {
   //if the img clicked has an id of errorEl it is the no results img, so on click dont display the info modal
-  if ($(this).attr("id") === "errorEl") {
+  if (
+    $(this).attr("id") === "errorEl" ||
+    $(this).attr("id") === "book-club-img"
+  ) {
     return;
   }
   $("#book-info-modal").addClass("is-active");
 
   var index = $(this).attr("data-index");
+  //console.log(index)
   // $(".book-mark-icon").attr("src", "./assets/img/bookmark.png");
 
   $("#book-info-modal .modal-card-title").text(arrayOfBooks[index].title);
   $("#book-info-modal .modal-summary-body").text(
     arrayOfBooks[index].description
   );
-  $("#book-info-modal .book-img").attr("src", arrayOfBooks[index].imageLink);
+  $("#book-info-modal .book-img").attr({
+    src: arrayOfBooks[index].imageLink,
+    "data-index": index,
+  });
   $("#book-info-modal .modal-tag-author").text(arrayOfBooks[index].authors);
   $("#book-info-modal .modal-tag-pages").text(arrayOfBooks[index].pages);
   $("#book-info-modal .modal-tag-published").text(
@@ -34,7 +41,7 @@ $("#main-book-list-container").on("click", "img", function () {
   $(".modal-tag-buy a").attr("href", arrayOfBooks[index].link);
 
   var bookExistingTitles = JSON.parse(localStorage.getItem("books"));
-  $("#saveBookBtn").attr("src", "./assets/img/bookmark.png");
+  $("#saveBookBtn").attr("src", "./assets/img/bookmark.png").addClass("mr-5");
 
   bookExistingTitles.forEach((book) => {
     if (
@@ -88,12 +95,12 @@ function getBookData(userInput) {
           userInput = userInput.split("+").join(" ");
           var errorMsg = $("<h2>")
             .text("Oops, no results for '" + userInput + "',  please try again")
-            .addClass("is-size-4 mt-5");
+            .addClass("is-size-4 mt-5 has-text-centered");
           var errorDivContainer = $("<div>").addClass(
             "is-flex is-flex-direction-column is-justify-content-center is-align-items-center"
           );
           var errorImg = $("<img>").attr({
-            src: "/assets/img/no-results.jpg",
+            src: "./assets/img/no-results.jpg",
             id: "errorEl",
           });
 
@@ -214,12 +221,13 @@ $(".modal-card-head").on("click", "#saveBookBtn", function () {
     purchaseLink: $(".modal-tag-buy").text(),
     published: $(".modal-tag-published").text(),
     imgLink: $(this).parent().parent().find(".book-img").attr("src"),
+    dataIndex: $("#book-info-modal .book-img").attr("data-index"),
   };
-
   saveBook(favoritedBookInfo);
 });
 
 function saveBook(book) {
+  var bookIndex = book.dataIndex;
   //get the local storage data
   var existingItems = JSON.parse(localStorage.getItem("books"));
   //if there is no data set the array to empty
@@ -239,60 +247,31 @@ function saveBook(book) {
   //set the array in local storage
   localStorage.setItem("books", JSON.stringify(existingItems));
 
-  displayReadingList();
+  displayReadingList(bookIndex);
 }
 
-// // KEEP BOOK FUNCTION
-// var deleteBtn = document.createElement("button");
-
-// function keepTitle() {
-//   var keys = Object.keys(localStorage);
-//   var keyLength = keys.length;
-//   while (keyLength--) {
-//     var bookLi = document.createElement("li");
-//
-//     deleteBtn.className = "erase";
-//     deleteBtn.innerHTML = "x";
-//     bookLi.innerHTML = displayBook(keys, keyLength);
-//     bookLi.setAttribute("id", keys[keyLength]);
-//     deleteBtn.setAttribute("style", "display: none; margin: 5px;");
-//     deleteBtn.addEventListener("click", function (e) {
-//       localStorage.removeItem(e.target.parentNode.id);
-//       e.target.parentNode.remove();
-//     });
-//     deleteBtnArray.push(deleteBtn);
-//     document.getElementById("bookmarkList").append(bookLi);
-//     document.getElementById(keys[keyLength]).append(deleteBtn);
-//   }
-// }
-
-// keepTitle();
-
-var deleteBtnArray = [];
-
-function displayReadingList() {
+function displayReadingList(index) {
   var books = JSON.parse(localStorage.getItem("books"));
-  console.log(books);
+
   var array = $(".title-for-list")
     .map(function () {
       return $.trim($(this).text());
     })
     .get();
-  console.log(array);
+
   if (!books) return;
 
   for (i = 0; i < books.length; i++) {
-    var deleteBtn = document.createElement("button");
-    deleteBtn.className = "erase";
-    deleteBtn.innerHTML = "x";
-    deleteBtn.setAttribute("style", "display: none; margin: 5px;");
-
-    deleteBtnArray.push(deleteBtn);
     var hr = $("<hr>");
-    var bmListContainer = $("<div>").addClass(
-      "is-flex is-flex-direction-column is-justify-content-center is-align-items-center mb-3"
-    );
-    var bmListImage = $("<img>").attr("src", books[i].imgLink);
+    var bmListContainer = $("<div>")
+      .addClass(
+        "is-flex is-flex-direction-column is-justify-content-center is-align-items-center mb-3 list-container"
+      )
+      .attr("id", "book-mark-img");
+
+    var bmListImage = $("<img>")
+      .attr({ src: books[i].imgLink, "data-index": index })
+      .addClass("hover-book shadow book-img");
     var bmListTitle = $("<h2>")
       .addClass(
         "mb-2 has-text-centered is-capitalized title-for-list no-border"
@@ -300,7 +279,6 @@ function displayReadingList() {
       .text(books[i].title);
     $("#bookmarkList").append(bmListContainer);
     bmListContainer.append(bmListTitle);
-    bmListContainer.append(deleteBtn);
     bmListContainer.append(bmListImage);
     bmListContainer.after(hr);
     for (x = 0; x < array.length; x++) {
@@ -309,37 +287,15 @@ function displayReadingList() {
         hr.remove();
       }
     }
-    deleteBtn.addEventListener("click", function (e) {
-      console.log("click");
-      console.log(e.target.parentNode);
-      localStorage.removeItem(e.target.parentNode.id);
-      e.target.parentNode.remove();
-    });
   }
+  $("#book-mark-placeholder").remove();
 }
 
 displayReadingList();
 
-// TRASH FUNCTION
-var visible = false;
+$("#clear-list").click(() => {
+  localStorage.clear();
 
-function editList() {
-  var editBtn = document.getElementById("editList");
-  editBtn.innerHTML = "Edit List";
-  editBtn.addEventListener("click", function (e) {
-    if (!visible) {
-      visible = true;
-      deleteBtnArray.forEach((element) =>
-        element.setAttribute("style", "display: inline;")
-      );
-      editBtn.innerHTML = "Cancel";
-    } else {
-      visible = false;
-      deleteBtnArray.forEach((element) =>
-        element.setAttribute("style", "display: none;")
-      );
-      editBtn.innerHTML = "Edit List";
-    }
-  });
-}
-editList();
+  $(".list-container").remove();
+  $("#bookmarkList").find("hr").remove();
+});
